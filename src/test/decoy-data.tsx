@@ -7,11 +7,11 @@ const lag = async function(){
 
 }
 
-import { Item } from "../models/link"
+import { Link } from "../models/link"
 export const fetch_parsed_link_data = async function(){
     await lag()
 
-    let items : Item[] = [
+    let items : Link[] = [
         {ID:0 ,title:"hello"   ,tag_ids:[2,1],url:"url1"},
         {ID:1 ,title:"two"     ,tag_ids:[1,2],url:"2"},
         {ID:3 ,title:"three"   ,tag_ids:[3,1],url:"これはurlf3"},
