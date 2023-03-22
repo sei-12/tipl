@@ -3,6 +3,7 @@ import { Link } from "./models/link";
 
 
 type LinkItemProps = {
+    key:number
     focus_link_id:number | null
     set_focus_link_id:Dispatch<SetStateAction<number | null>>
     data:Link
@@ -44,6 +45,7 @@ export const LinkList = function( p : LinkListProps ){
     const map_links = function(){
         return p.list_up_links.map( link => {
             let props : LinkItemProps = {
+                key:link.ID,
                 focus_link_id:p.focus_link_id,
                 set_focus_link_id:p.set_focus_link_id,
                 data:link
