@@ -14,7 +14,7 @@ function App() {
 	const link_list_props : LinkListProps = {
 		focus_link_id:focus_link_id,
 		set_focus_link_id:set_focus_link_id,
-		list_up_links:links
+		list_up_links:filted_links
 	}
 
 	useEffect(() => {
