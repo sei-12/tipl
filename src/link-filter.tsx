@@ -66,13 +66,14 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     
     useEffect(() => {
-        if(search_word.includes(last_search_word)){
-            // タグのチェックも入れる　今はまだ
+        if(search_word.includes(last_search_word) && 
+           last_tag_ids.every(id=>filter_tag_ids.includes(id))){
             wrap_set_filted_links(p.filted_links)
         }else{
             wrap_set_filted_links(p.links)
         }
         set_last_search_word(search_word)
+        set_last_tag_ids(filter_tag_ids)
     },[search_word,filter_tag_ids])
 
     useEffect(() => {
