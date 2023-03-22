@@ -1,3 +1,6 @@
+import { Tag } from "../models/tag"
+import { Link } from "../models/link"
+
 const lag = async function(){
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -7,7 +10,6 @@ const lag = async function(){
 
 }
 
-import { Link } from "../models/link"
 export const fetch_parsed_link_data = async function(){
     await lag()
 
@@ -28,7 +30,7 @@ export const fetch_parsed_link_data = async function(){
     return items
 }
 
-import { Tag } from "../models/tag"
+
 export const fetch_parsed_tag_datas = async function(){
     await lag()
 
