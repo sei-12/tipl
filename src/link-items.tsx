@@ -3,8 +3,8 @@ import { Link } from "./models/link";
 
 
 type LinkItemProps = {
-    focus_link_id:number
-    set_focus_link_id:Dispatch<SetStateAction<number>>
+    focus_link_id:number | null
+    set_focus_link_id:Dispatch<SetStateAction<number | null>>
     data:Link
 } 
 
@@ -18,10 +18,10 @@ const LinkItem = function(p:LinkItemProps){
     }
 
     useEffect(() => {
-        if(p.focus_link_id == p.data.ID){
-            div_ref.current!.classList.add('focus-item')
-        }else{
+        if(p.focus_link_id == null || p.focus_link_id != p.data.ID){
             div_ref.current!.classList.remove('focus-item')
+        }else{
+            div_ref.current!.classList.add('focus-item')
         }
     },[p.focus_link_id])
 
@@ -34,8 +34,8 @@ const LinkItem = function(p:LinkItemProps){
 }
 
 export type LinkListProps = {
-    focus_link_id:number
-    set_focus_link_id:Dispatch<SetStateAction<number>>
+    focus_link_id:number | null
+    set_focus_link_id:Dispatch<SetStateAction<number | null>>
     list_up_links:Link[]
 }
 
