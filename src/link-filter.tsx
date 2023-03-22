@@ -14,7 +14,29 @@ export type LinkFilterProps = {
 }
 
 export const LinkFilter = (p:LinkFilterProps) => {
-   
+
+    const wrap_set_filted_links = function(filted_links:Link[]){
+        let calc_count = 0
+        let search_words = search_word.split(" ")
+
+        filter_tag_ids.forEach( id => {
+            filted_links = filted_links.filter(link => {
+                calc_count++
+                return link.ID == id
+            })
+        })
+
+        search_words.forEach( word => {
+            filted_links = filted_links.filter(link=>{
+                calc_count++
+                return link.title.includes(word)
+            })
+        })
+
+        console.log("計算回数:",calc_count)
+        p.set_filted_links(filted_links)
+    }
+
     const [search_word,set_search_word] = useState<string>("")
     const [filter_tag_ids,set_filter_tag_ids] = useState<number[]>([])
     const [tag_selector_is_show,set_tag_selector_is_show] = useState(false)
@@ -42,25 +64,8 @@ export const LinkFilter = (p:LinkFilterProps) => {
         // 計算コストが高い
         // 直す方法がわからん
         let filted_links : Link[] = p.links
-        let calc_count = 0
-        let search_words = search_word.split(" ")
-
-        filter_tag_ids.forEach( id => {
-            filted_links = filted_links.filter(link => {
-                calc_count++
-                return link.ID == id
-            })
-        })
-
-        search_words.forEach( word => {
-            filted_links = filted_links.filter(link=>{
-                calc_count++
-                return link.title.includes(word)
-            })
-        })
-
-        console.log("計算回数:",calc_count)
-        p.set_filted_links(filted_links)
+        wrap_set_filted_links(filted_links)
+    },[search_word,filter_tag_ids])
 
     },[search_word,filter_tag_ids])
 
