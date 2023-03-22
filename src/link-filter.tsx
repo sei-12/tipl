@@ -54,6 +54,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     const tag_selector_props : TagSelectoorProps = {
         is_show:tag_selector_is_show,
+        set_is_show:set_tag_selector_is_show,
         tags:p.tags,
         exclude_ids:filter_tag_ids,
         set_result_id_buf:set_tag_selector_result_buf

@@ -1,0 +1,39 @@
+:root{
+    --base-size: 60vw;
+    --f-size:calc( var(--base-size ) / 15);
+}
+
+.tag-comp-window{
+    position: absolute;
+    width: var(--base-size);
+    height: calc( 1.2 * var(--base-size));
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: calc( var(--base-size) / 20);
+    box-shadow: 5px 5px 20px black;
+    font-size:var(--f-size);
+}
+
+.input-search-word{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: var(--f-size);
+    margin-bottom: 7%;
+}
+
+.win-inner{
+    width: 80%;
+
+    margin: 10%;
+}
+
+.item{
+    padding-left: 3%;
+    border-radius: calc( var(--base-size) / 50 );
+}
+
+.focused-item{
+    background-color: rgb(170,200,220);
+}
