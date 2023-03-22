@@ -67,7 +67,9 @@ export const LinkFilter = (p:LinkFilterProps) => {
         wrap_set_filted_links(filted_links)
     },[search_word,filter_tag_ids])
 
-    },[search_word,filter_tag_ids])
+    useEffect(() => {
+        wrap_set_filted_links(p.links)
+    },[p.links])
 
     return (
         <div>
