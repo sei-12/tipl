@@ -21,6 +21,7 @@ function App() {
 	const link_filter_props : LinkFilterProps = {
 		tags:tags,
 		links:links,
+		filted_links:filted_links,
 		set_filted_links:set_filted_links
 	}
 

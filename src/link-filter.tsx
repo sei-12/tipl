@@ -10,6 +10,7 @@ import { Link } from './models/link'
 export type LinkFilterProps = {
     tags:Tag[]
     links:Link[]
+    filted_links:Link[]
     set_filted_links:Dispatch<SetStateAction<Link[]>>
 }
 
@@ -26,7 +27,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
             })
         })
 
-        search_words.forEach( word => {
+        if(search_word != "") search_words.forEach( word => {
             filted_links = filted_links.filter(link=>{
                 calc_count++
                 return link.title.includes(word)
@@ -41,6 +42,10 @@ export const LinkFilter = (p:LinkFilterProps) => {
     const [filter_tag_ids,set_filter_tag_ids] = useState<number[]>([])
     const [tag_selector_is_show,set_tag_selector_is_show] = useState(false)
     const [tag_selector_result_buf,set_tag_selector_result_buf] = useState<number | null>(null)
+
+
+    const [last_search_word,set_last_search_word] = useState<string>("")
+    const [last_tag_ids,set_last_tag_ids] = useState<number[]>([])
 
     const tag_list_props : TagListProps = {
         tag_ids:filter_tag_ids,
@@ -61,10 +66,13 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     
     useEffect(() => {
-        // 計算コストが高い
-        // 直す方法がわからん
-        let filted_links : Link[] = p.links
-        wrap_set_filted_links(filted_links)
+        if(search_word.includes(last_search_word)){
+            // タグのチェックも入れる　今はまだ
+            wrap_set_filted_links(p.filted_links)
+        }else{
+            wrap_set_filted_links(p.links)
+        }
+        set_last_search_word(search_word)
     },[search_word,filter_tag_ids])
 
     useEffect(() => {
