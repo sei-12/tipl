@@ -2,13 +2,13 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState , ChangeEv
 import { Tag } from './models/tag'
 import './tag-selector.css'
 
-type TagItemProps = {
+type TagSelectorItemProps = {
     key:number
     focus_item:Tag | null
     data:Tag
 }
 
-const TagItem = function(p:TagItemProps){
+const TagSelectorItem = function(p:TagSelectorItemProps){
 
     const current_div = useRef<HTMLDivElement>(null)
     
@@ -138,7 +138,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 
     const put_filted_items = function(){
         return filted_items.map( tag => (
-            <TagItem
+            <TagSelectorItem
                 key={tag.ID}
                 data={tag}
                 focus_item={focus_item}
