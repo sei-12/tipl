@@ -23,7 +23,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
         filter_tag_ids.forEach( id => {
             filted_links = filted_links.filter(link => {
                 calc_count++
-                return link.ID == id
+                return link.tag_ids.includes(id)
             })
         })
 
