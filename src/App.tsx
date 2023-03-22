@@ -20,7 +20,6 @@ function App() {
 
 	const search_word_input_box_props : SearchWordInputBoxProps = {
 		links:links,
-		tags:tags,
 		filted_links:filted_links,
 		set_filted_links:set_filted_links
 	}
