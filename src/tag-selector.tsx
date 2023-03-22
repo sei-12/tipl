@@ -77,6 +77,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 
 
 		if(e.key == "Enter" && isComposing == false){
+            set_result()
 			p.set_is_show(false)
 		}
 	}
@@ -116,8 +117,6 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 
     // todo rename ウィンドウを非表示にした後の処理
 	const hide_window_process = () => {
-        set_result()
-
         window_div.current!.style.display = "none"
 		if(search_word_box.current != null){
 			search_word_box.current!.value = ""
