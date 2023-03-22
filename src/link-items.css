@@ -1,0 +1,12 @@
+
+:root{
+    --base-size:20vw;
+}
+
+.item{
+    width: var(--base-size);
+}
+
+.focus-item{
+    background-color: red;
+}
