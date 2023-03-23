@@ -1,4 +1,17 @@
 .App {
 	width: 100vw;
 	height: 100vh;
+	display: flex;
+	overflow: hidden;
+}
+
+
+.left{
+	width: 30vw;
+	height: 100vh;
+}
+
+.right{
+	width: 70vw;
+	height: 100vh;
 }

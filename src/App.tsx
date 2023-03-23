@@ -44,8 +44,12 @@ function App() {
 
 	return (
 		<div className="App">
-			<LinkFilter {...link_filter_props}/>
+			<div className='left'>
+				<LinkFilter {...link_filter_props}/>
+			</div>
+			<div className='right'>
 			<LinkList {...link_list_props} />
+			</div>
 		</div>
 	);
 }
