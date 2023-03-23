@@ -42,10 +42,6 @@ export const LinkFilter = (p:LinkFilterProps) => {
     const [tag_selector_is_show,set_tag_selector_is_show] = useState(false)
     const [tag_selector_result_buf,set_tag_selector_result_buf] = useState<number | null>(null)
 
-
-    const [last_search_word,set_last_search_word] = useState<string>("")
-    const [last_tag_ids,set_last_tag_ids] = useState<number[]>([])
-
     const tag_list_props : TagListProps = {
         tags:p.tags,
         show_tag_ids:filter_tag_ids,
@@ -71,9 +67,6 @@ export const LinkFilter = (p:LinkFilterProps) => {
         // last_filtertag_idsが思うように動作しないため仕方なく
         // 
         wrap_set_filted_links(p.links)
-
-        set_last_search_word(search_word)
-        set_last_tag_ids(filter_tag_ids)
     },[search_word,filter_tag_ids])
 
     useEffect(() => {
