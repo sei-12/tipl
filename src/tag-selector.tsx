@@ -13,10 +13,13 @@ const TagSelectorItem = function(p:TagSelectorItemProps){
     const current_div = useRef<HTMLDivElement>(null)
     
     useEffect(() => {
-        if(p.focus_item == null) return
+        
         if(current_div.current == null) return
-
         let class_name = "focused-item"
+        if(p.focus_item == null){
+            current_div.current.classList.remove(class_name)
+            return
+        }
         if(p.focus_item.ID == p.data.ID){
             current_div.current.classList.add(class_name)
         }else{
@@ -130,6 +133,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 			search_word_box.current!.value = ""
 		}
 		set_filted_items(p.tags)
+        set_focus_item(null)
 	}
 
     const put_filted_items = function(){
