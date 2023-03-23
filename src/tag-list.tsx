@@ -1,6 +1,23 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { Tag } from './models/tag'
 
+type ContextMenuProps = {
+    window_position:{
+        x:number
+        y:number
+    },
+    is_show:boolean
+    set_is_show:Dispatch<SetStateAction<boolean>>
+    target_tag_id:number
+    set_show_tag_ids:Dispatch<SetStateAction<number[]>>
+}
+
+const ContextMenu = (p:ContextMenuProps) => {
+    return (
+        <div></div>
+    )
+}
+
 type TagItemProps = {
     key:number
     data:Tag
