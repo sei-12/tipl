@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { Link } from "./models/link";
-import './link-items.css'
+import './link-list.css'
 
 type LinkItemProps = {
     key:number

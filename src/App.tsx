@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { LinkEditor, LinkEditorProps } from './link-editor';
 import { LinkFilter, LinkFilterProps } from './link-filter';
-import { LinkList, LinkListProps } from './link-items';
+import { LinkList, LinkListProps } from './link-list';
 import { Link } from './models/link';
 import { Tag } from './models/tag';
 import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-data';
