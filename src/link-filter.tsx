@@ -48,8 +48,9 @@ export const LinkFilter = (p:LinkFilterProps) => {
     const [last_tag_ids,set_last_tag_ids] = useState<number[]>([])
 
     const tag_list_props : TagListProps = {
-        tag_ids:filter_tag_ids,
-        set_tag_ids:set_filter_tag_ids
+        tags:p.tags,
+        show_tag_ids:filter_tag_ids,
+        set_show_tag_ids:set_filter_tag_ids
     }
 
     const tag_selector_props : TagSelectoorProps = {
@@ -83,7 +84,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     return (
         <div>
-            <input type="text" onChange={(e)=>set_search_word(e.target.value)} />
+            <input type="text" onChange={(e)=>set_search_word(e.target.value)} /> <br />
             <input type="button" value="add tag" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
             <TagSelectoor {...tag_selector_props}/>
