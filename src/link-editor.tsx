@@ -3,6 +3,7 @@ import './link-editor.css'
 import { Link } from './models/link'
 import { Tag } from './models/tag'
 import { TagList, TagListProps } from './tag-list'
+import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 
 export type LinkEditorProps = {
     links:Link[]
@@ -43,16 +44,31 @@ export const LinkEditor = (p:LinkEditorProps) => {
 
         p.set_links([...buf])
     }
+
+    const hadnle_add_tag_btn = function(){
+        if(p.focus_link_id == null) return
+        set_tag_selector_is_show(true)
+    }
     
     const [can_save,set_can_save] = useState<boolean>(false)
     const [selected_tag_ids,set_selected_tag_ids] = useState<number[]>([])
     const title_input_box = useRef<HTMLInputElement>(null)
     const url_input_box = useRef<HTMLInputElement>(null)
-  
+    const [tag_selector_is_show,set_tag_selector_is_show] = useState<boolean>(false)
+    const [tag_selector_result_id_buf,set_tag_selector_result_id_buf] = useState<number | null>(null)
+
     const tag_list_props : TagListProps = {
         tags:p.tags,
         show_tag_ids:selected_tag_ids,
         set_show_tag_ids:set_selected_tag_ids
+    }
+
+    const tag_selector_props : TagSelectoorProps = {
+        is_show:tag_selector_is_show,
+        set_is_show:set_tag_selector_is_show,
+        tags:p.tags,
+        exclude_ids:selected_tag_ids,
+        set_result_id_buf:set_tag_selector_result_id_buf
     }
 
     useEffect(() => {
@@ -69,6 +85,12 @@ export const LinkEditor = (p:LinkEditorProps) => {
         }
     },[p.focus_link_id])
 
+    useEffect(() => {
+        if(tag_selector_result_id_buf == null)return
+        set_selected_tag_ids([...selected_tag_ids,tag_selector_result_id_buf])
+        set_tag_selector_result_id_buf(null)
+    },[tag_selector_result_id_buf])
+
     return (
         <div>
             <input type="button" value="save" onClick={handle_save} /> <br />
@@ -76,7 +98,10 @@ export const LinkEditor = (p:LinkEditorProps) => {
             />
             <input type="text" onChange={handle_onChange} ref={url_input_box}
             />
+            <br />
+            <input type="button" value="add tag" onClick={hadnle_add_tag_btn}/>
             <TagList {...tag_list_props}/>
+            <TagSelectoor {...tag_selector_props}/>
         </div>
     )
 }
