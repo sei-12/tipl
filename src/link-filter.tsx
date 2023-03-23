@@ -34,7 +34,6 @@ export const LinkFilter = (p:LinkFilterProps) => {
             })
         })
 
-        console.log("計算回数:",calc_count)
         p.set_filted_links(filted_links)
     }
 
@@ -68,12 +67,10 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     
     useEffect(() => {
-        if(search_word.includes(last_search_word) && 
-           last_tag_ids.every(id=>filter_tag_ids.includes(id))){
-            wrap_set_filted_links(p.filted_links)
-        }else{
-            wrap_set_filted_links(p.links)
-        }
+        // last_filtertag_idsが思うように動作しないため仕方なく
+        // 
+        wrap_set_filted_links(p.links)
+
         set_last_search_word(search_word)
         set_last_tag_ids(filter_tag_ids)
     },[search_word,filter_tag_ids])
