@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react'
+import './link-filter.css'
 import { useState } from 'react'
 import { Tag } from './models/tag'
 import { TagList, TagListProps } from './tag-list'
@@ -74,7 +75,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
     },[p.links])
 
     return (
-        <div>
+        <div className='link-filter'>
             <input type="text" onChange={(e)=>set_search_word(e.target.value)} /> <br />
             <input type="button" value="add tag" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
