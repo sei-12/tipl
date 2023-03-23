@@ -1,15 +1,15 @@
 :root{
-    --base-size: 60vw;
-    --f-size:calc( var(--base-size ) / 15);
+    --tag-selector-base-size: 30vw;
+    --f-size:calc( var(--tag-selector-base-size ) / 15);
 }
 
 .tag-comp-window{
     position: absolute;
-    width: var(--base-size);
-    height: calc( 1.2 * var(--base-size));
+    width: var(--tag-selector-base-size);
+    height: calc( 1.2 * var(--tag-selector-base-size));
     overflow: hidden;
     background-color: rgb(20,20,20);
-    border-radius: calc( var(--base-size) / 20);
+    border-radius: calc( var(--tag-selector-base-size) / 20);
     box-shadow: 5px 5px 20px black;
     font-size:var(--f-size);
 }
@@ -31,7 +31,7 @@
 
 .item{
     padding-left: 3%;
-    border-radius: calc( var(--base-size) / 50 );
+    border-radius: calc( var(--tag-selector-base-size) / 50 );
 }
 
 .focused-item{
