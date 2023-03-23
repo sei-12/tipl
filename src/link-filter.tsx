@@ -65,7 +65,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
     }
 
     useHotkeys("ctrl+/",focus_search_word_box)
-
+    useHotkeys("ctrl+3",() => set_tag_selector_is_show(true))
     useEffect(() => {
         if(tag_selector_result_buf == null)return
         set_filter_tag_ids([...filter_tag_ids,tag_selector_result_buf])
