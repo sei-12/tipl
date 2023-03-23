@@ -20,7 +20,7 @@ const ContextMenu = (p:ContextMenuProps) => {
     const handle_excludes = function(e:React.MouseEvent<HTMLInputElement>){
         let index = p.show_tag_ids.findIndex(id => id == p.target_tag_id)
         let buf = p.show_tag_ids
-        buf.splice(index)
+        buf.splice(index,1)
         p.set_show_tag_ids([...buf])
 
         p.set_is_show(false)
