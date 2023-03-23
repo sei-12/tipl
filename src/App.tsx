@@ -7,32 +7,52 @@ import { Link } from './models/link';
 import { Tag } from './models/tag';
 import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-data';
 import { useHotkeys } from 'react-hotkeys-hook'
+import { Dispatch , SetStateAction} from 'react'
 
-function App() {
+type HotkeyProps = {
+	filted_links:Link[]
+	set_focus_link_id:Dispatch<SetStateAction<number | null>>
+	focus_link_id:number | null
+}
+
+function Hotkey(p:HotkeyProps){
 	const focus_up = () => {
-		if(filted_links.length == 0){
+		if(p.filted_links.length == 0){
 			return
 		}
-		let new_index = filted_links.findIndex(tag => tag.ID == focus_link_id) - 1
+		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) - 1
 		if(new_index < 0){
-			new_index = filted_links.length - 1
+			new_index = p.filted_links.length - 1
 		}
-		set_focus_link_id( filted_links[new_index].ID )
+		p.set_focus_link_id( p.filted_links[new_index].ID )
 	}
 
 	const focus_down = () => {
-		if(filted_links.length == 0){
+		if(p.filted_links.length == 0){
 			return
 		}
 
-		let new_index = filted_links.findIndex(tag => tag.ID == focus_link_id) + 1
+		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) + 1
 
-		if(new_index == filted_links.length){
+		if(new_index == p.filted_links.length){
 			new_index = 0
 		}
 
-        set_focus_link_id(filted_links[new_index].ID)
+        p.set_focus_link_id(p.filted_links[new_index].ID)
 	}
+	
+	useHotkeys('ctrl+n',focus_down)
+	useHotkeys('ctrl+p',focus_up)
+	useHotkeys('enter',() => console.log("press enter"))
+	useHotkeys('shift+enter',() => console.log("open google"))
+
+	return (
+		<div></div>
+	)
+}
+
+function App() {
+	
 
 	const [tags,set_tags] = useState<Tag[]>([])
 	const [filted_links, set_filted_links] = useState<Link[]>([])
@@ -60,8 +80,13 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
-	useHotkeys('ctrl+n',focus_down)
-	useHotkeys('ctrl+p',focus_up)
+	const hotkey_props : HotkeyProps = {
+		filted_links:filted_links,
+		set_focus_link_id:set_focus_link_id,
+		focus_link_id:focus_link_id
+	}
+
+	
 
 	useEffect(() => {
 		(async () => {
@@ -82,6 +107,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Hotkey {...hotkey_props}/>
 			<div className='left'>
 				<LinkFilter {...link_filter_props}/>
 				<LinkEditor {...link_editor_props} />
