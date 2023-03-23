@@ -6,8 +6,34 @@ import { LinkList, LinkListProps } from './link-list';
 import { Link } from './models/link';
 import { Tag } from './models/tag';
 import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-data';
+import { useHotkeys } from 'react-hotkeys-hook'
 
 function App() {
+	const focus_up = () => {
+		if(filted_links.length == 0){
+			return
+		}
+		let new_index = filted_links.findIndex(tag => tag.ID == focus_link_id) - 1
+		if(new_index < 0){
+			new_index = filted_links.length - 1
+		}
+		set_focus_link_id( filted_links[new_index].ID )
+	}
+
+	const focus_down = () => {
+		if(filted_links.length == 0){
+			return
+		}
+
+		let new_index = filted_links.findIndex(tag => tag.ID == focus_link_id) + 1
+
+		if(new_index == filted_links.length){
+			new_index = 0
+		}
+
+        set_focus_link_id(filted_links[new_index].ID)
+	}
+
 	const [tags,set_tags] = useState<Tag[]>([])
 	const [filted_links, set_filted_links] = useState<Link[]>([])
 	const [links , set_links ] = useState<Link[]>([])
@@ -33,6 +59,9 @@ function App() {
 		set_tags:set_tags,
 		focus_link_id:focus_link_id
 	}
+
+	useHotkeys('ctrl+n',focus_down)
+	useHotkeys('ctrl+p',focus_up)
 
 	useEffect(() => {
 		(async () => {
