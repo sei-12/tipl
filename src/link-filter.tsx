@@ -63,6 +63,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
     useEffect(() => {
         if(tag_selector_result_buf == null)return
         set_filter_tag_ids([...filter_tag_ids,tag_selector_result_buf])
+        set_tag_selector_result_buf(null)
     },[tag_selector_result_buf])
 
     
