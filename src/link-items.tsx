@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { Link } from "./models/link";
-
+import './link-items.css'
 
 type LinkItemProps = {
     key:number
@@ -19,10 +19,15 @@ const LinkItem = function(p:LinkItemProps){
     }
 
     useEffect(() => {
-        if(p.focus_link_id == null || p.focus_link_id != p.data.ID){
+        if(p.focus_link_id == null){
             div_ref.current!.classList.remove('focus-item')
-        }else{
+            return
+        }
+
+        if(p.focus_link_id == p.data.ID){
             div_ref.current!.classList.add('focus-item')
+        }else{
+            div_ref.current!.classList.remove('focus-item')
         }
     },[p.focus_link_id])
 
