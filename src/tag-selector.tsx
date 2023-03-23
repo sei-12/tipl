@@ -162,11 +162,6 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 		}
 	},[p.is_show])
 
-    // useEffect(() => {
-    //     wrap_set_filted_items("")
-    // },[p.tags])
-
-
     return (
         <div ref={window_div} className='tag-comp-window'>
             <div className="win-inner">
