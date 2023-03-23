@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import './link-filter.css'
 import { useState } from 'react'
 import { Tag } from './models/tag'
@@ -6,7 +6,7 @@ import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { ChangeEvent } from 'react'
 import { Link } from './models/link'
-
+import { useHotkeys } from 'react-hotkeys-hook'
 
 export type LinkFilterProps = {
     tags:Tag[]
@@ -38,6 +38,13 @@ export const LinkFilter = (p:LinkFilterProps) => {
         p.set_filted_links(filted_links)
     }
 
+    const focus_search_word_box = () => {
+        if(search_word_box.current == null)return
+
+        search_word_box.current.focus()
+    }
+
+    const search_word_box = useRef<HTMLInputElement>(null)
     const [search_word,set_search_word] = useState<string>("")
     const [filter_tag_ids,set_filter_tag_ids] = useState<number[]>([])
     const [tag_selector_is_show,set_tag_selector_is_show] = useState(false)
@@ -56,6 +63,8 @@ export const LinkFilter = (p:LinkFilterProps) => {
         exclude_ids:filter_tag_ids,
         set_result_id_buf:set_tag_selector_result_buf
     }
+
+    useHotkeys("ctrl+/",focus_search_word_box)
 
     useEffect(() => {
         if(tag_selector_result_buf == null)return
@@ -76,7 +85,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     return (
         <div className='link-filter'>
-            <input type="text" onChange={(e)=>set_search_word(e.target.value)} /> <br />
+            <input type="text" ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} /> <br />
             <input type="button" value="add tag" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
             <TagSelectoor {...tag_selector_props}/>
