@@ -43,6 +43,10 @@ const ContextMenu = (p:ContextMenuProps) => {
         current_div.current.style.left = p.window_position.left_px + "px"
     },[p.window_position])
 
+    useEffect(() => {
+        document.addEventListener('click',() => p.set_is_show(false))
+    },[])
+
     return (
         <div ref={current_div} className='context-menu'>
             <input type="button" value="excludes" onClick={handle_excludes}/>
