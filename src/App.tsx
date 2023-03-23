@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { LinkEditor, LinkEditorProps } from './link-editor';
 import { LinkFilter, LinkFilterProps } from './link-filter';
 import { LinkList, LinkListProps } from './link-items';
 import { Link } from './models/link';
@@ -25,6 +26,14 @@ function App() {
 		set_filted_links:set_filted_links
 	}
 
+	const link_editor_props : LinkEditorProps = {
+		links:links,
+		set_links:set_links,
+		tags:tags,
+		set_tags:set_tags,
+		focus_link_id:focus_link_id
+	}
+
 	useEffect(() => {
 		(async () => {
 			set_links( await fetch_parsed_link_data() )
@@ -46,6 +55,7 @@ function App() {
 		<div className="App">
 			<div className='left'>
 				<LinkFilter {...link_filter_props}/>
+				<LinkEditor {...link_editor_props} />
 			</div>
 			<div className='right'>
 			<LinkList {...link_list_props} />
