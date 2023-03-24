@@ -91,13 +91,13 @@ function App() {
 
 	useEffect(() => {
 		if(loaded_links == false) return
-		let links_json = JSON.stringify(links)
+		let links_json = JSON.stringify(links,null,4)
 		window.electronAPI.save_links_json(links_json)
 	},[links])
 
 	useEffect(() => {
 		if(loaded_tags == false) return
-		let tags_json = JSON.stringify(tags)
+		let tags_json = JSON.stringify(tags,null,4)
 		window.electronAPI.save_tags_json(tags_json)
 	},[tags])
 
