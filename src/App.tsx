@@ -59,6 +59,9 @@ function App() {
 	const [links , set_links ] = useState<Link[]>([])
 	const [focus_link_id,set_focus_link_id] = useState<number | null> (null)
 
+	const [loaded_links,set_loaded_links] = useState<boolean>(false)
+	const [loaded_tags,set_loaded_tags] = useState<boolean>(false)
+	
 	const link_list_props : LinkListProps = {
 		focus_link_id:focus_link_id,
 		set_focus_link_id:set_focus_link_id,
@@ -86,18 +89,33 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
-	
+	useEffect(() => {
+		if(loaded_links == false) return
+		let links_json = JSON.stringify(links)
+		window.electronAPI.save_links_json(links_json)
+	},[links])
+
+	useEffect(() => {
+		if(loaded_tags == false) return
+		let tags_json = JSON.stringify(tags)
+		window.electronAPI.save_tags_json(tags_json)
+	},[tags])
+
 
 	useEffect(() => {
 		(async () => {
-			set_links( await fetch_parsed_link_data() )
+			let datas = JSON.parse(await window.electronAPI.load_links_json()) as Link[]
+			set_links([...datas])
+			set_loaded_links(true)
 		})()
 	},[])
 
 
 	useEffect(() => {
 		(async () => {
-			set_tags( await fetch_parsed_tag_datas() )
+			let datas = JSON.parse(await window.electronAPI.load_tags_json()) as Tag[]
+			set_tags([...datas])
+			set_loaded_tags(true)
 		})()
 	},[])
 

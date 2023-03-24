@@ -1,7 +1,12 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import path = require('path')
+import fs = require('fs')
 import { exec } from 'child_process'
 
+
+const current_dir = `${__dirname}/../../../`
+const LINKS_JSON_PATH = current_dir + "test-datas/link.json"
+const TAGS_JSON_PATH = current_dir + "test-datas/tags.json"
 
 const mainURL = `file:${__dirname}/../../index.html`
 
@@ -25,6 +30,11 @@ const createWidnow = () => {
             preload: path.join(__dirname, "preload.js")
         }
     })
+
+    ipcMain.handle('load-link-json',async () => fs.readFileSync(LINKS_JSON_PATH,'utf-8') )
+    ipcMain.handle('load-tags-json',async () => fs.readFileSync(TAGS_JSON_PATH,'utf-8') )
+    ipcMain.handle('save-tags-json',(_:any,json_text:string) => {fs.writeFileSync(TAGS_JSON_PATH,json_text)})
+    ipcMain.handle('save-link-json',(_:any,json_text:string) => {fs.writeFileSync(LINKS_JSON_PATH,json_text)})
     
     ipcMain.handle('open-url',open_url)
     ipcMain.handle('open-google-chrome',open_google_chrome)
