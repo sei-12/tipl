@@ -6,6 +6,7 @@ const mainURL = `file:${__dirname}/../../index.html`
 
 const createWidnow = () => {
     const mainWindow = new BrowserWindow({
+        title:"tipl",
         width: 500,
         height: 500,
         webPreferences: {
