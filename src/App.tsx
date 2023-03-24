@@ -9,6 +9,39 @@ import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-dat
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 
+const next_id = function(links_tags:Link[] | Tag[]) : number{
+	return links_tags[links_tags.length - 1].ID + 1
+}
+
+const create_new_link = function(
+	links:Link[],
+	set_links:Dispatch<SetStateAction<Link[]>>,
+	set_focus_link_id:Dispatch<SetStateAction<number | null>>
+){
+	let new_link : Link = {
+		ID:next_id(links),
+		title:"title",
+		url:"url",
+		tag_ids:[]
+	}
+
+	set_links([...links,new_link])
+	set_focus_link_id(new_link.ID)
+
+	return
+}
+
+const create_new_tag = async function(
+	tags:Tag[],
+	set_tags:Dispatch<SetStateAction<Tag[]>>
+){
+
+	let new_tag : Tag = {
+		ID:next_id(tags),
+		title:""
+	}
+}
+
 type HotkeyProps = {
 	filted_links:Link[]
 	set_focus_link_id:Dispatch<SetStateAction<number | null>>
