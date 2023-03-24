@@ -122,6 +122,9 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
+	useHotkeys('cmd+shift+n',() => create_new_tag(tags,set_tags))
+	useHotkeys('cmd+n',() => create_new_link(links,set_links,set_focus_link_id))
+
 	useEffect(() => {
 		if(loaded_links == false) return
 		let links_json = JSON.stringify(links,null,4)
