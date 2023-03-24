@@ -1,8 +1,20 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path = require('path')
+import { exec } from 'child_process'
 
 
 const mainURL = `file:${__dirname}/../../index.html`
+
+const open_url = function(_:any,url:string){
+    let cmd = `open ${url}`
+    exec(cmd)
+}
+
+const open_google_chrome = function(_:any,words:string[]){
+    let todo_rename = words.join("+")
+    let url = "https://www.google.com/search?q=" + todo_rename
+    open_url(null,url)
+}
 
 const createWidnow = () => {
     const mainWindow = new BrowserWindow({
@@ -13,6 +25,9 @@ const createWidnow = () => {
             preload: path.join(__dirname, "preload.js")
         }
     })
+    
+    ipcMain.handle('open-url',open_url)
+    ipcMain.handle('open-google-chrome',open_google_chrome)
     mainWindow.loadURL(mainURL)
 }
 
