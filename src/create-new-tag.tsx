@@ -13,6 +13,7 @@ export type CreateNewTagProps = {
 
 export const CreateNewTag = (p:CreateNewTagProps) => {
 	const next_id = function(links_tags:Link[] | Tag[]) : number{
+		if(links_tags.length == 0)return 1
 		return links_tags[links_tags.length - 1].ID + 1
 	}
 
