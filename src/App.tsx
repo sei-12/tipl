@@ -5,11 +5,8 @@ import { LinkFilter, LinkFilterProps } from './link-filter';
 import { LinkList, LinkListProps } from './link-list';
 import { Link } from './models/link';
 import { Tag } from './models/tag';
-import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-data';
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
-import { Prompt, PromptProps } from './prompt';
-import { HotkeyScapes, Hotkey_Scape } from './hotkeys';
 import { CreateNewTag,CreateNewTagProps } from './create-new-tag';
 
 const next_id = function(links_tags:Link[] | Tag[]) : number{
