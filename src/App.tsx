@@ -8,6 +8,7 @@ import { Tag } from './models/tag';
 import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-data';
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
+import { Prompt, PromptProps } from './prompt';
 
 const next_id = function(links_tags:Link[] | Tag[]) : number{
 	return links_tags[links_tags.length - 1].ID + 1
@@ -31,16 +32,6 @@ const create_new_link = function(
 	return
 }
 
-const create_new_tag = async function(
-	tags:Tag[],
-	set_tags:Dispatch<SetStateAction<Tag[]>>
-){
-
-	let new_tag : Tag = {
-		ID:next_id(tags),
-		title:""
-	}
-}
 
 type HotkeyProps = {
 	filted_links:Link[]
@@ -84,6 +75,46 @@ function Hotkey(p:HotkeyProps){
 	)
 }
 
+type CreateNewTagProps = {
+	tags:Tag[]
+	set_tags:Dispatch<SetStateAction<Tag[]>>
+}
+
+const CreateNewTag = (p:CreateNewTagProps) => {
+
+	const create_new_tag = function(){
+		set_prompt_is_show(true)
+	}
+
+	const [prompt_is_show,set_prompt_is_show] = useState<boolean>(false)
+	const [prompt_result_buf,set_prompt_result_buf] = useState<string|null>(null)
+	const prompt_props : PromptProps = {
+		is_show:prompt_is_show,
+		set_is_show:set_prompt_is_show,
+		message:"tag name",
+		set_result_buf:set_prompt_result_buf
+	}
+
+	useHotkeys('meta+shift+n',create_new_tag)
+
+	useEffect(() => {
+		if(prompt_result_buf == null || prompt_result_buf == "") return
+		let id = next_id(p.tags)
+		let new_tag : Tag = {
+			ID:id,
+			title:prompt_result_buf
+		}
+		p.set_tags([...p.tags,new_tag])
+	},[prompt_result_buf])
+
+	return (
+		<div>
+			<input type="button" value="create new tag" onClick={create_new_tag}/>
+			<Prompt {...prompt_props}/>
+		</div>
+	)
+}
+
 function App() {
 	
 
@@ -99,6 +130,11 @@ function App() {
 		focus_link_id:focus_link_id,
 		set_focus_link_id:set_focus_link_id,
 		list_up_links:filted_links
+	}
+
+	const create_new_tag_props : CreateNewTagProps = {
+		set_tags:set_tags,
+		tags:tags
 	}
 
 	const link_filter_props : LinkFilterProps = {
@@ -122,7 +158,6 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
-	useHotkeys('meta+shift+n',() => create_new_tag(tags,set_tags))
 	useHotkeys('meta+n',() => create_new_link(links,set_links,set_focus_link_id))
 
 	useEffect(() => {
@@ -164,6 +199,7 @@ function App() {
 			<Hotkey {...hotkey_props}/>
 			<div className='left'>
 				<LinkFilter {...link_filter_props}/>
+				<CreateNewTag {...create_new_tag_props} />
 				<LinkEditor {...link_editor_props} />
 			</div>
 			<div className='right'>
