@@ -82,7 +82,7 @@ type CreateNewTagProps = {
 
 const CreateNewTag = (p:CreateNewTagProps) => {
 
-	const create_new_tag = function(){
+	const create_new_tag = () => {
 		set_prompt_is_show(true)
 	}
 
@@ -95,7 +95,18 @@ const CreateNewTag = (p:CreateNewTagProps) => {
 		set_result_buf:set_prompt_result_buf
 	}
 
-	useHotkeys('meta+shift+n',create_new_tag)
+	useEffect(() => {
+		document.addEventListener("keydown",(e) => {
+			if(
+				e.metaKey && 
+				e.shiftKey && 
+				e.altKey == false && 
+				e.ctrlKey == false && 
+				e.key == "n"){
+					create_new_tag()
+			}
+		})	
+	},[])
 
 	useEffect(() => {
 		if(prompt_result_buf == null || prompt_result_buf == "") return
