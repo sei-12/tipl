@@ -32,7 +32,7 @@ const LinkItem = function(p:LinkItemProps){
     },[p.focus_link_id])
 
     return (
-        <div ref={div_ref} onClick={focus}>
+        <div className="item" ref={div_ref} onClick={focus}>
             {p.data.title}
 
         </div>

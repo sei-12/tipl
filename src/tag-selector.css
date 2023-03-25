@@ -31,7 +31,8 @@
 
 .item{
     padding-left: 3%;
-    border-radius: calc( var(--tag-selector-base-size) / 50 );
+    border-radius: calc( var(--tag-selector-base-size) / 50 );   
+    color: white;
 }
 
 .focused-item{

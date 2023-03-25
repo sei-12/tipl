@@ -5,8 +5,10 @@
 
 .item{
     width: var(--base-size);
+    color: white;
 }
 
 .focus-item{
-    background-color: red;
+    background-color: rgb(170,200,220);
+    color: black;
 }
