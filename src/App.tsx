@@ -9,49 +9,50 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 import { CreateNewTag,CreateNewTagProps } from './create-new-tag';
 import { CreateNewLink, CreateNewLinkProps } from './create-new-link';
+import { MoveFocus, MoveFocusProps } from './move-focus';
 
 
-type HotkeyProps = {
-	filted_links:Link[]
-	set_focus_link_id:Dispatch<SetStateAction<number | null>>
-	focus_link_id:number | null
-}
+// type HotkeyProps = {
+// 	filted_links:Link[]
+// 	set_focus_link_id:Dispatch<SetStateAction<number | null>>
+// 	focus_link_id:number | null
+// }
 
-function Hotkey(p:HotkeyProps){
-	const focus_up = () => {
-		if(p.filted_links.length == 0){
-			return
-		}
-		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) - 1
-		if(new_index < 0){
-			new_index = p.filted_links.length - 1
-		}
-		p.set_focus_link_id( p.filted_links[new_index].ID )
-	}
+// function Hotkey(p:HotkeyProps){
+// 	const focus_up = () => {
+// 		if(p.filted_links.length == 0){
+// 			return
+// 		}
+// 		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) - 1
+// 		if(new_index < 0){
+// 			new_index = p.filted_links.length - 1
+// 		}
+// 		p.set_focus_link_id( p.filted_links[new_index].ID )
+// 	}
 
-	const focus_down = () => {
-		if(p.filted_links.length == 0){
-			return
-		}
+// 	const focus_down = () => {
+// 		if(p.filted_links.length == 0){
+// 			return
+// 		}
 
-		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) + 1
+// 		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) + 1
 
-		if(new_index == p.filted_links.length){
-			new_index = 0
-		}
+// 		if(new_index == p.filted_links.length){
+// 			new_index = 0
+// 		}
 
-        p.set_focus_link_id(p.filted_links[new_index].ID)
-	}
+//         p.set_focus_link_id(p.filted_links[new_index].ID)
+// 	}
 	
-	useHotkeys('ctrl+n',focus_down)
-	useHotkeys('ctrl+p',focus_up)
-	useHotkeys('enter',() => console.log("press enter"))
-	useHotkeys('shift+enter',() => console.log("open google"))
+// 	useHotkeys('ctrl+n',focus_down)
+// 	useHotkeys('ctrl+p',focus_up)
+// 	useHotkeys('enter',() => console.log("press enter"))
+// 	useHotkeys('shift+enter',() => console.log("open google"))
 
-	return (
-		<div></div>
-	)
-}
+// 	return (
+// 		<div></div>
+// 	)
+// }
 
 let loaded_links = false
 let loaded_tags = false
@@ -97,7 +98,7 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
-	const hotkey_props : HotkeyProps = {
+	const move_focus_props : MoveFocusProps = {
 		filted_links:filted_links,
 		set_focus_link_id:set_focus_link_id,
 		focus_link_id:focus_link_id
@@ -141,7 +142,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Hotkey {...hotkey_props}/>
+			
 			<div className='left'>
 				<LinkFilter {...link_filter_props}/>
 				<CreateNewTag {...create_new_tag_props} />
@@ -149,6 +150,7 @@ function App() {
 				<LinkEditor {...link_editor_props} />
 			</div>
 			<div className='right'>
+				<MoveFocus {...move_focus_props}/>
 			<LinkList {...link_list_props} />
 			</div>
 		</div>
