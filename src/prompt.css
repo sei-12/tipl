@@ -1,0 +1,61 @@
+:root{
+    --prompt-base-size:clamp(120px,50vw,600px);
+}
+
+.btns {
+    position: absolute;
+    bottom: 10%;
+    width: 50%;
+    left: 50%;
+}
+.btns > input[type="button"]{
+    font-size: calc( var(--prompt-base-size) / 22);
+    width:40%;
+    margin-left: 5%;
+    border: none;
+    border-radius: calc( var(--prompt-base-size) / 100);
+    box-shadow: 5px 5px 20px black;
+}
+
+.done-btn{
+    background-color: rgb(65, 105, 225);
+    border: none;
+    color: white;
+}
+
+.prompt-current{
+    --height-a: 0.4;
+    position: absolute;
+    width: var(--prompt-base-size);
+    height: calc( var(--prompt-base-size) * var(--height-a) );
+    /* 真ん中に表示 */
+    top: calc((100vh - var(--prompt-base-size) * var(--height-a)) / 2 );
+    left: calc((100vw - var(--prompt-base-size)) / 2 );
+
+    background-color: rgb(20, 20, 20);
+    box-shadow: 5px 5px 20px black;
+    border-radius: 2vh;
+}
+
+.outer{
+    width: 100%;
+    height: 100%;    
+}
+
+.inner{
+    font-size: calc( var(--prompt-base-size) / 20);
+    position: relative;
+    margin: 5%;
+    width: 90%;
+    height: 90%;
+}
+
+.inner > input[type="text"]{
+    margin-top: 2%;
+    font-size: calc( var(--prompt-base-size) / 20);
+    box-shadow: 5px 5px 20px black;
+    /* outline: none; */
+    border: none;
+    border-radius: calc( var(--prompt-base-size) / 100);
+    padding: 1%;
+}
