@@ -9,6 +9,7 @@ import { fetch_parsed_link_data, fetch_parsed_tag_datas } from './test/decoy-dat
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 import { Prompt, PromptProps } from './prompt';
+import { HotkeyScapes, Hotkey_Scape } from './hotkeys';
 
 const next_id = function(links_tags:Link[] | Tag[]) : number{
 	return links_tags[links_tags.length - 1].ID + 1
@@ -97,6 +98,7 @@ const CreateNewTag = (p:CreateNewTagProps) => {
 
 	useEffect(() => {
 		document.addEventListener("keydown",(e) => {
+			if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
 			if(
 				e.metaKey && 
 				e.shiftKey && 
