@@ -1,19 +1,18 @@
 import React from 'react'
 
+/*
+スコープの確認方法
+配列の中にはHotkeyScapesのスタチックメンバが入ります
+
+if([].includes(Hotkey_Scape.get()) == false)
+
+*/
+
+
+
 export class HotkeyScapes{
     static Normal = Symbol("normal")
     
 }
 
-class HotkeyScape{
-    scape:symbol
-    constructor(){
-        this.scape = HotkeyScapes.Normal
-    }
-
-    get(){
-        return this.scape
-    }
-}
-
-export const Hotkey_Scape = new HotkeyScape()
+export let Hotkey_Scape : symbol = HotkeyScapes.Normal
