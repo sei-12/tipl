@@ -24,7 +24,7 @@ const open_google_chrome = function(_:any,words:string[]){
 const createWidnow = () => {
     const mainWindow = new BrowserWindow({
         title:"tipl",
-        width: 500,
+        width: 800,
         height: 500,
         webPreferences: {
             preload: path.join(__dirname, "preload.js")
