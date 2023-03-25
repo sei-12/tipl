@@ -70,7 +70,7 @@ const TagItem = (p:TagItemProps) => {
         p.set_context_menu_position({top_px:e.clientY,left_px:e.clientX})
     }
     return (
-        <div onContextMenu={handle_on_context_menu}>
+        <div className="item" onContextMenu={handle_on_context_menu}>
             {p.data.title}
         </div>
     )
