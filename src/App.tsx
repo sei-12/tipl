@@ -64,6 +64,7 @@ function App() {
 	const [links , set_links ] = useState<Link[]>([])
 	const [focus_link_id,set_focus_link_id] = useState<number | null> (null)
 	
+	/// PROPS
 	const link_list_props : LinkListProps = {
 		focus_link_id:focus_link_id,
 		set_focus_link_id:set_focus_link_id,
@@ -102,6 +103,8 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
+
+	// DATA FILE
 	useEffect(() => {
 		if(loaded_links == false) return
 		let links_json = JSON.stringify(links,null,4)
