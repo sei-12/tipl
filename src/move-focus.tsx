@@ -59,11 +59,9 @@ export const MoveFocus = (p:MoveFocusProps) => {
                 e.shiftKey == false){
 
                 if(e.key == "n"){
-                    console.log("press N!")
                     set_move_focus_request("n")
                 }
                 if(e.key == "p"){
-                    console.log("press P!")
                     set_move_focus_request("p")
                 }
             }

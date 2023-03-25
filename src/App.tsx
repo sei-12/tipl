@@ -12,48 +12,6 @@ import { CreateNewLink, CreateNewLinkProps } from './create-new-link';
 import { MoveFocus, MoveFocusProps } from './move-focus';
 
 
-// type HotkeyProps = {
-// 	filted_links:Link[]
-// 	set_focus_link_id:Dispatch<SetStateAction<number | null>>
-// 	focus_link_id:number | null
-// }
-
-// function Hotkey(p:HotkeyProps){
-// 	const focus_up = () => {
-// 		if(p.filted_links.length == 0){
-// 			return
-// 		}
-// 		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) - 1
-// 		if(new_index < 0){
-// 			new_index = p.filted_links.length - 1
-// 		}
-// 		p.set_focus_link_id( p.filted_links[new_index].ID )
-// 	}
-
-// 	const focus_down = () => {
-// 		if(p.filted_links.length == 0){
-// 			return
-// 		}
-
-// 		let new_index = p.filted_links.findIndex(tag => tag.ID == p.focus_link_id) + 1
-
-// 		if(new_index == p.filted_links.length){
-// 			new_index = 0
-// 		}
-
-//         p.set_focus_link_id(p.filted_links[new_index].ID)
-// 	}
-	
-// 	useHotkeys('ctrl+n',focus_down)
-// 	useHotkeys('ctrl+p',focus_up)
-// 	useHotkeys('enter',() => console.log("press enter"))
-// 	useHotkeys('shift+enter',() => console.log("open google"))
-
-// 	return (
-// 		<div></div>
-// 	)
-// }
-
 let loaded_links = false
 let loaded_tags = false
 
