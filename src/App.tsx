@@ -8,28 +8,7 @@ import { Tag } from './models/tag';
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 import { CreateNewTag,CreateNewTagProps } from './create-new-tag';
-
-const next_id = function(links_tags:Link[] | Tag[]) : number{
-	return links_tags[links_tags.length - 1].ID + 1
-}
-
-const create_new_link = function(
-	links:Link[],
-	set_links:Dispatch<SetStateAction<Link[]>>,
-	set_focus_link_id:Dispatch<SetStateAction<number | null>>
-){
-	let new_link : Link = {
-		ID:next_id(links),
-		title:"title",
-		url:"url",
-		tag_ids:[]
-	}
-
-	set_links([...links,new_link])
-	set_focus_link_id(new_link.ID)
-
-	return
-}
+import { CreateNewLink, CreateNewLinkProps } from './create-new-link';
 
 
 type HotkeyProps = {
@@ -96,6 +75,12 @@ function App() {
 		tags:tags
 	}
 
+	const create_new_link_props : CreateNewLinkProps = {
+		set_focus_link_id:set_focus_link_id,
+		links:links,
+		set_links:set_links
+	}
+
 	const link_filter_props : LinkFilterProps = {
 		tags:tags,
 		links:links,
@@ -116,8 +101,6 @@ function App() {
 		set_focus_link_id:set_focus_link_id,
 		focus_link_id:focus_link_id
 	}
-
-	useHotkeys('meta+n',() => create_new_link(links,set_links,set_focus_link_id))
 
 	useEffect(() => {
 		if(loaded_links == false) return
@@ -159,6 +142,7 @@ function App() {
 			<div className='left'>
 				<LinkFilter {...link_filter_props}/>
 				<CreateNewTag {...create_new_tag_props} />
+				<CreateNewLink {...create_new_link_props}/>
 				<LinkEditor {...link_editor_props} />
 			</div>
 			<div className='right'>
