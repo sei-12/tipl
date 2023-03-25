@@ -74,6 +74,9 @@ function Hotkey(p:HotkeyProps){
 	)
 }
 
+let loaded_links = false
+let loaded_tags = false
+
 function App() {
 	
 
@@ -81,9 +84,6 @@ function App() {
 	const [filted_links, set_filted_links] = useState<Link[]>([])
 	const [links , set_links ] = useState<Link[]>([])
 	const [focus_link_id,set_focus_link_id] = useState<number | null> (null)
-
-	const [loaded_links,set_loaded_links] = useState<boolean>(false)
-	const [loaded_tags,set_loaded_tags] = useState<boolean>(false)
 	
 	const link_list_props : LinkListProps = {
 		focus_link_id:focus_link_id,
@@ -136,7 +136,7 @@ function App() {
 		(async () => {
 			let datas = JSON.parse(await window.electronAPI.load_links_json()) as Link[]
 			set_links([...datas])
-			set_loaded_links(true)
+			loaded_links = true
 		})()
 	},[])
 
@@ -145,7 +145,7 @@ function App() {
 		(async () => {
 			let datas = JSON.parse(await window.electronAPI.load_tags_json()) as Tag[]
 			set_tags([...datas])
-			set_loaded_tags(true)
+			loaded_tags = true
 		})()
 	},[])
 
