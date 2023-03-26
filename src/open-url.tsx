@@ -62,8 +62,8 @@ export const OpenURL = (p:OpenURLProps) => {
     },[])
     return (
         <div>
-            <input type="button" value="open url" onClick={open_url} />
-            <input type="button" value="open google chrome" onClick={open_google_chrome} />
+            <input type="button" value="open url (Enter)" onClick={open_url} />
+            <input type="button" value="open google chrome (shift + Enter)" onClick={open_google_chrome} />
         </div>
     )
 }

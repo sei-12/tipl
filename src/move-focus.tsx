@@ -70,8 +70,8 @@ export const MoveFocus = (p:MoveFocusProps) => {
 
     return (
         <div>
-            <input type="button" value="focus up" onClick={focus_up} />
-            <input type="button" value="focus down" onClick={focus_down} />
+            <input type="button" value="focus up (ctrl + p)" onClick={focus_up} />
+            <input type="button" value="focus down (ctrl + n)" onClick={focus_down} />
         </div>
     )
 }
