@@ -7,6 +7,8 @@
     position: absolute;
     width: var(--tag-selector-base-size);
     height: calc( 1.2 * var(--tag-selector-base-size));
+    top:calc((100vh - 1.2 * var(--tag-selector-base-size)) / 2);
+    left:calc((100vw - var(--tag-selector-base-size)) / 2);
     overflow: hidden;
     background-color: rgb(20,20,20);
     border-radius: calc( var(--tag-selector-base-size) / 20);
