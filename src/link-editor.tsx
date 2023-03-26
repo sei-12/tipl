@@ -57,6 +57,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
     const [tag_selector_is_show,set_tag_selector_is_show] = useState<boolean>(false)
     const [tag_selector_result_id_buf,set_tag_selector_result_id_buf] = useState<number | null>(null)
     const [save_request,set_save_request] = useState<boolean>(false)
+    const [add_tag_request,set_add_tag_request] = useState(false)
 
     const tag_list_props : TagListProps = {
         tags:p.tags,
@@ -120,12 +121,18 @@ export const LinkEditor = (p:LinkEditorProps) => {
                 e.metaKey ==  false &&
                 e.ctrlKey ==  false&&
                 e.shiftKey ==  true){
-                if(e.key == "3"){
-                    hadnle_add_tag_btn()
+                if(e.key == "#"){
+                    set_add_tag_request(true)
                 }
             }
         }) 
     },[])
+
+    useEffect(() => {
+        if(add_tag_request == false) return
+        hadnle_add_tag_btn()
+        set_add_tag_request(false)
+    },[add_tag_request])
 
     useEffect(() => {
         if(save_request == false) return
