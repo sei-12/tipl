@@ -13,8 +13,6 @@ export type LinkEditorProps = {
     focus_link_id:number | null
 }
 
-let save_request = false
-
 export const LinkEditor = (p:LinkEditorProps) => {
     const handle_onChange = function(e:ChangeEvent<HTMLInputElement>){
         if(e.target.value == ""){
@@ -58,6 +56,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
     const url_input_box = useRef<HTMLInputElement>(null)
     const [tag_selector_is_show,set_tag_selector_is_show] = useState<boolean>(false)
     const [tag_selector_result_id_buf,set_tag_selector_result_id_buf] = useState<number | null>(null)
+    const [save_request,set_save_request] = useState<boolean>(false)
 
     const tag_list_props : TagListProps = {
         tags:p.tags,
@@ -112,7 +111,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
                 e.ctrlKey ==  false&&
                 e.shiftKey ==  false){
                 if(e.key == "s"){
-                    save_request = true
+                    set_save_request(true)
                 } 
             }
         }) 
@@ -121,6 +120,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
     useEffect(() => {
         if(save_request == false) return
         handle_save()
+        set_save_request(false)
     },[save_request])
 
     return (
