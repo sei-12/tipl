@@ -42,6 +42,7 @@ function App() {
 	}
 
 	const link_filter_props : LinkFilterProps = {
+		focus_link_id:focus_link_id,
 		tags:tags,
 		links:links,
 		filted_links:filted_links,

@@ -7,12 +7,14 @@ import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { ChangeEvent } from 'react'
 import { Link } from './models/link'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { OpenURL, OpenURLProps } from './open-url'
 
 export type LinkFilterProps = {
     tags:Tag[]
     links:Link[]
     filted_links:Link[]
     set_filted_links:Dispatch<SetStateAction<Link[]>>
+    focus_link_id:number | null
 }
 
 export const LinkFilter = (p:LinkFilterProps) => {
@@ -64,6 +66,14 @@ export const LinkFilter = (p:LinkFilterProps) => {
         set_result_id_buf:set_tag_selector_result_buf
     }
 
+    const open_url_props : OpenURLProps = {
+        focus_link_id:p.focus_link_id,
+        links:p.links,
+        search_word:search_word,
+        filter_tag_ids:filter_tag_ids,
+        tags:p.tags
+    }
+
     useHotkeys("ctrl+/",focus_search_word_box)
     useHotkeys("ctrl+3",() => set_tag_selector_is_show(true))
     useEffect(() => {
@@ -85,6 +95,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
     return (
         <div className='link-filter'>
+            <OpenURL {...open_url_props} />
             <input type="text" ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} /> <br />
             <input type="button" value="add tag" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
