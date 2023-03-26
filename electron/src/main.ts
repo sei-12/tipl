@@ -1,12 +1,23 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import path = require('path')
 import fs = require('fs')
+import os = require('os')
 import { exec } from 'child_process'
 
 
-const current_dir = `${__dirname}/../../../`
-const LINKS_JSON_PATH = current_dir + "test-datas/link.json"
-const TAGS_JSON_PATH = current_dir + "test-datas/tags.json"
+const current_dir = os.homedir() + "/.tipl/"
+const LINKS_JSON_PATH = current_dir + "link.json"
+const TAGS_JSON_PATH = current_dir + "tags.json"
+if(fs.existsSync(current_dir) == false){
+    fs.mkdirSync(current_dir)
+}
+if(fs.existsSync(TAGS_JSON_PATH) == false){
+    fs.writeFileSync(TAGS_JSON_PATH,"[]")
+}
+if(fs.existsSync(LINKS_JSON_PATH) == false){
+    fs.writeFileSync(LINKS_JSON_PATH,"[]")
+}
+
 
 const mainURL = `file:${__dirname}/../../index.html`
 
