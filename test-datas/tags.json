@@ -1,38 +1,14 @@
 [
     {
-        "ID": 0,
-        "title": "hello"
-    },
-    {
         "ID": 1,
-        "title": "num"
+        "title": "vscode"
     },
     {
         "ID": 2,
-        "title": "str"
+        "title": "snippet"
     },
     {
         "ID": 3,
-        "title": "long"
-    },
-    {
-        "ID": 4,
-        "title": "testtag"
-    },
-    {
-        "ID": 5,
-        "title": "hello"
-    },
-    {
-        "ID": 6,
-        "title": "react"
-    },
-    {
-        "ID": 7,
-        "title": "test1"
-    },
-    {
-        "ID": 8,
-        "title": "test2"
+        "title": "iterm"
     }
 ]
