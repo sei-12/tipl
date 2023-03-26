@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState , ChangeEvent} from 'react'
+import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
 import { Tag } from './models/tag'
 import './tag-selector.css'
 
@@ -85,7 +86,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
                 cursor_up()
             }
         }
-        
+
         if(
             e.altKey == false &&
             e.metaKey ==  false &&
@@ -147,6 +148,17 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 		}
 		set_filted_items(p.tags)
         set_focus_item(null)
+        // 若干のタイムラグが欲しい
+        ;(async () => {
+            async function lag(){
+                return new Promise((resolve) => {
+                    setTimeout(() => resolve(null),10)
+                })
+            }
+
+            await lag()
+            Hotkey_Scape.set(HotkeyScapes.Normal)
+        })()
 	}
 
     const put_filted_items = function(){
@@ -174,6 +186,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 			window_div.current!.style.display = "block"
 			search_word_box.current!.focus()
             wrap_set_filted_items(p.tags,"")
+            Hotkey_Scape.set(HotkeyScapes.TagSelector)
 		}else{
 			hide_window_process()
 		}
