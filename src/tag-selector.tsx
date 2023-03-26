@@ -70,19 +70,32 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 	}
 
     const handle_onkeydown = function(e:React.KeyboardEvent<HTMLInputElement>){
-		if(e.ctrlKey && e.key == "n"){
-			cursor_down()
-		}
-		
-		if(e.ctrlKey && e.key == "p"){
-			cursor_up()
-		}
 
+        if(
+            e.altKey == false &&
+            e.metaKey ==  false &&
+            e.ctrlKey ==  true&&
+            e.shiftKey ==  false){
+            
+            if(e.key == "n"){
+                cursor_down()
+            }
 
-		if(e.key == "Enter" && isComposing == false){
-            set_result()
-			p.set_is_show(false)
-		}
+            if(e.key == "p"){
+                cursor_up()
+            }
+        }
+        
+        if(
+            e.altKey == false &&
+            e.metaKey ==  false &&
+            e.ctrlKey ==  false&&
+            e.shiftKey ==  false){
+            if(e.key == "Enter" && isComposing == false){
+                set_result()
+                p.set_is_show(false)
+            }
+        }
 	}
 
     const set_result = function(){
