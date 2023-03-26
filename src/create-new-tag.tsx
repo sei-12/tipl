@@ -34,7 +34,7 @@ export const CreateNewTag = (p:CreateNewTagProps) => {
 
 	useEffect(() => {
 		document.addEventListener("keydown",(e) => {
-			if([HotkeyScapes.Normal].includes(Hotkey_Scape) == false) return
+			if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
 			if(
 				e.metaKey && 
 				e.shiftKey && 
