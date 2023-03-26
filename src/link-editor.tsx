@@ -4,7 +4,7 @@ import { Link } from './models/link'
 import { Tag } from './models/tag'
 import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
-
+import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
 export type LinkEditorProps = {
     links:Link[]
     set_links:Dispatch<SetStateAction<Link[]>>
@@ -12,6 +12,8 @@ export type LinkEditorProps = {
     set_tags:Dispatch<SetStateAction<Tag[]>>
     focus_link_id:number | null
 }
+
+let save_request = false
 
 export const LinkEditor = (p:LinkEditorProps) => {
     const handle_onChange = function(e:ChangeEvent<HTMLInputElement>){
@@ -100,9 +102,30 @@ export const LinkEditor = (p:LinkEditorProps) => {
         }
     },[selected_tag_ids])
 
+    useEffect(() => {
+        document.addEventListener("keydown",(e) => {
+            if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
+
+            if(
+                e.altKey == false &&
+                e.metaKey ==  true &&
+                e.ctrlKey ==  false&&
+                e.shiftKey ==  false){
+                if(e.key == "s"){
+                    save_request = true
+                } 
+            }
+        }) 
+    },[])
+
+    useEffect(() => {
+        if(save_request == false) return
+        handle_save()
+    },[save_request])
+
     return (
         <div>
-            <input type="button" value="save" onClick={handle_save} /> <br />
+            <input type="button" value="save (meta + s)" onClick={handle_save} /> <br />
             <input type="text" onChange={handle_onChange} ref={title_input_box}
             />
             <input type="text" onChange={handle_onChange} ref={url_input_box}
