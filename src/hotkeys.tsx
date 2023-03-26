@@ -4,6 +4,7 @@ import React from 'react'
 スコープの確認方法
 配列の中にはHotkeyScapesのスタチックメンバが入ります
 
+import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
 if([].includes(Hotkey_Scape.get()) == false) return
 
 
