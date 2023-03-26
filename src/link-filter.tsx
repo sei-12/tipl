@@ -8,6 +8,7 @@ import { ChangeEvent } from 'react'
 import { Link } from './models/link'
 import { OpenURL, OpenURLProps } from './open-url'
 import { HotkeyScapes , Hotkey_Scape } from './hotkeys'
+import { ResetSearchCriteria, ResetSearchCriteriaProps } from './reset-search-criteria'
 
 export type LinkFilterProps = {
     tags:Tag[]
@@ -74,6 +75,12 @@ export const LinkFilter = (p:LinkFilterProps) => {
         tags:p.tags
     }
 
+    const reset_search_criteria_props : ResetSearchCriteriaProps = {
+        set_search_word:set_search_word,
+        set_tag_ids:set_filter_tag_ids,
+        search_word_box:search_word_box
+    }
+
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
@@ -112,6 +119,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
     return (
         <div className='link-filter'>
             <OpenURL {...open_url_props} />
+            <ResetSearchCriteria {...reset_search_criteria_props} />
             <input type="text" className='input-search-word-box' ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} placeholder="ctrl + /"/> <br />
             <input type="button" value="add tag (ctrl + 3)" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
