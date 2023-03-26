@@ -6,6 +6,8 @@ import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
 export type LinkEditorProps = {
+    is_show:boolean
+    set_is_show:Dispatch<SetStateAction<boolean>>
     links:Link[]
     set_links:Dispatch<SetStateAction<Link[]>>
     tags:Tag[]
@@ -43,13 +45,18 @@ export const LinkEditor = (p:LinkEditorProps) => {
         buf[index].tag_ids = selected_tag_ids
 
         p.set_links([...buf])
+        p.set_is_show(false)
     }
 
     const hadnle_add_tag_btn = function(){
         if(p.focus_link_id == null) return
         set_tag_selector_is_show(true)
     }
-    
+
+    const [isComposing, setComposition] = useState(false);
+    const startComposition = () => setComposition(true);
+    const endComposition = () => setComposition(false);
+    const current_div = useRef<HTMLDivElement>(null)
     const [can_save,set_can_save] = useState<boolean>(false)
     const [selected_tag_ids,set_selected_tag_ids] = useState<number[]>([])
     const title_input_box = useRef<HTMLInputElement>(null)
@@ -104,14 +111,14 @@ export const LinkEditor = (p:LinkEditorProps) => {
 
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
-            if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
+            if([HotkeyScapes.LinkPrompt].includes(Hotkey_Scape.get()) == false) return
 
             if(
                 e.altKey == false &&
-                e.metaKey ==  true &&
+                e.metaKey ==  false &&
                 e.ctrlKey ==  false&&
                 e.shiftKey ==  false){
-                if(e.key == "s"){
+                if(e.key == "Enter" && isComposing == false){
                     set_save_request(true)
                 } 
             }
@@ -121,7 +128,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
                 e.metaKey ==  false &&
                 e.ctrlKey ==  true&&
                 e.shiftKey ==  false){
-                if(e.key == "4"){
+                if(e.key == "3"){
                     set_add_tag_request(true)
                 }
             }
@@ -140,13 +147,47 @@ export const LinkEditor = (p:LinkEditorProps) => {
         set_save_request(false)
     },[save_request])
 
+    useEffect(() => {
+        if( current_div.current == null ) return
+        if(p.is_show){
+            Hotkey_Scape.set(HotkeyScapes.LinkPrompt)
+            current_div.current.style.display = 'block'
+        }else{
+            current_div.current.style.display = 'none'
+
+            ;(async () => {
+                async function lag(){
+                    return new Promise((resolve) => {
+                        setTimeout(() => resolve(null),10)
+                    })
+                }
+            
+                await lag()
+                Hotkey_Scape.set(HotkeyScapes.Normal)
+            })()            
+        }
+    },[p.is_show])
+
     return (
-        <div>
+        <div ref={current_div} >
             <input type="button" value="save (meta + s)" onClick={handle_save} /> <br />
-            <input type="text" className='editor-input-box' onChange={handle_onChange} ref={title_input_box}
+            <input 
+                type="text" 
+                className='editor-input-box' 
+                onChange={handle_onChange} 
+                ref={title_input_box}
+                onCompositionStart={startComposition}
+                onCompositionEnd={endComposition}
             />
-            <input type="text" className='editor-input-box' onChange={handle_onChange} ref={url_input_box}
+            <input 
+                type="text" 
+                className='editor-input-box' 
+                onChange={handle_onChange} 
+                ref={url_input_box}
+                onCompositionStart={startComposition}
+                onCompositionEnd={endComposition}
             />
+            
             <br />
             <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
             <TagList {...tag_list_props}/>
