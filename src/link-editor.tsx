@@ -119,9 +119,9 @@ export const LinkEditor = (p:LinkEditorProps) => {
             if(
                 e.altKey == false &&
                 e.metaKey ==  false &&
-                e.ctrlKey ==  false&&
-                e.shiftKey ==  true){
-                if(e.key == "#"){
+                e.ctrlKey ==  true&&
+                e.shiftKey ==  false){
+                if(e.key == "4"){
                     set_add_tag_request(true)
                 }
             }
