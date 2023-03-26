@@ -12,7 +12,23 @@ if([].includes(Hotkey_Scape.get()) == false)
 
 export class HotkeyScapes{
     static Normal = Symbol("normal")
-    
+    static TagSelector = Symbol("tag-selector")    
 }
 
-export let Hotkey_Scape : symbol = HotkeyScapes.Normal
+class HotkeyScape{
+    scape:symbol
+
+    constructor(){
+        this.scape = HotkeyScapes.Normal
+    }
+
+    get(){
+        return this.scape
+    }
+
+    set(scape:symbol){
+        this.scape = scape
+    }
+}
+
+export const Hotkey_Scape = new HotkeyScape()

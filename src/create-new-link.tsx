@@ -62,7 +62,7 @@ export const CreateNewLink = (p:CreateNewLinkProps) => {
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             // console.log(p) なぜかはわからないがこの時点でp.linksを参照しても空の配列
-            if([HotkeyScapes.Normal].includes(Hotkey_Scape) == false){
+            if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false){
                 return
             }
 

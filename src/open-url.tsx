@@ -44,7 +44,7 @@ export const OpenURL = (p:OpenURLProps) => {
 
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
-            if([HotkeyScapes.Normal].includes(Hotkey_Scape) == false) return
+            if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
 
             if(
                 e.altKey == false &&
