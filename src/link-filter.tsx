@@ -112,7 +112,7 @@ export const LinkFilter = (p:LinkFilterProps) => {
     return (
         <div className='link-filter'>
             <OpenURL {...open_url_props} />
-            <input type="text" ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} placeholder="ctrl + /"/> <br />
+            <input type="text" className='input-search-word-box' ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} placeholder="ctrl + /"/> <br />
             <input type="button" value="add tag (ctrl + 3)" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
             <TagSelectoor {...tag_selector_props}/>

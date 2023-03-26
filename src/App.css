@@ -7,11 +7,24 @@
 
 
 .left{
+	padding-left: 1vw;
+	padding-top: 1vh;
 	width: 30vw;
 	height: 100vh;
+	background-color: rgb(30, 30, 35);
+	box-shadow: 5px 5px 20px black;
 }
 
 .right{
 	width: 70vw;
 	height: 100vh;
+}
+
+input[type="button"]{
+	color: white;
+	background-color: rgb(70, 70, 75);
+	border: none;
+	padding: 2%;
+	margin: 1%;
+	border-radius: 0.5vh;
 }

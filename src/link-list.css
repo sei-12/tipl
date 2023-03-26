@@ -1,9 +1,10 @@
 
 :root{
-    --base-size:100%;
+    --base-size:90%;
 }
 
 .item{
+    margin-left:3%;
     width: var(--base-size);
     color: white;
 }

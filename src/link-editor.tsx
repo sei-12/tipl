@@ -126,9 +126,9 @@ export const LinkEditor = (p:LinkEditorProps) => {
     return (
         <div>
             <input type="button" value="save (meta + s)" onClick={handle_save} /> <br />
-            <input type="text" onChange={handle_onChange} ref={title_input_box}
+            <input type="text" className='editor-input-box' onChange={handle_onChange} ref={title_input_box}
             />
-            <input type="text" onChange={handle_onChange} ref={url_input_box}
+            <input type="text" className='editor-input-box' onChange={handle_onChange} ref={url_input_box}
             />
             <br />
             <input type="button" value="add tag" onClick={hadnle_add_tag_btn}/>

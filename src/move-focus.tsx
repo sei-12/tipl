@@ -2,7 +2,7 @@ import React ,{useEffect,useState} from 'react'
 import { Link } from './models/link'
 import { Dispatch , SetStateAction} from 'react'
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
-
+import './move-focus.css'
 export type MoveFocusProps = {
     filted_links:Link[],
     set_focus_link_id:Dispatch<SetStateAction<number | null>>
@@ -70,8 +70,8 @@ export const MoveFocus = (p:MoveFocusProps) => {
 
     return (
         <div>
-            <input type="button" value="focus up (ctrl + p)" onClick={focus_up} />
-            <input type="button" value="focus down (ctrl + n)" onClick={focus_down} />
+            <input type="button" className='move-focus-btn' value="focus up (ctrl + p)" onClick={focus_up} />
+            <input type="button" className='move-focus-btn' value="focus down (ctrl + n)" onClick={focus_down} />
         </div>
     )
 }
