@@ -56,6 +56,24 @@ export const CreateNewTag = (p:CreateNewTagProps) => {
 		p.set_tags([...p.tags,new_tag])
 	},[prompt_result_buf])
 
+	useEffect(() => {
+		if(prompt_is_show){
+			Hotkey_Scape.set(HotkeyScapes.Prompt)
+		}else{
+			// 若干のタイムラグが欲しい
+			;(async () => {
+				async function lag(){
+					return new Promise((resolve) => {
+						setTimeout(() => resolve(null),10)
+					})
+				}
+	
+				await lag()
+				Hotkey_Scape.set(HotkeyScapes.Normal)
+			})()
+		}
+	},[prompt_is_show])
+
 	return (
 		<div>
 			<input type="button" value="create new tag (cmd+shift+n)" onClick={create_new_tag}/>

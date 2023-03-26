@@ -6,12 +6,26 @@ import React from 'react'
 
 if([].includes(Hotkey_Scape.get()) == false)
 
+
+// 若干のタイムラグが欲しい
+;(async () => {
+    async function lag(){
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(null),10)
+        })
+    }
+
+    await lag()
+    Hotkey_Scape.set(HotkeyScapes.Normal)
+})()
+
 */
 
 
 
 export class HotkeyScapes{
     static Normal = Symbol("normal")
+    static Prompt = Symbol("prompt")
     static TagSelector = Symbol("tag-selector")    
 }
 
