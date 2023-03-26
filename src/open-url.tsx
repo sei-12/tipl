@@ -18,7 +18,7 @@ export const OpenURL = (p:OpenURLProps) => {
     const open_google_chrome = function(){
         let search_words = p.search_word.split(" ")
         let filter_tag_words = p.filter_tag_ids.map( id => p.tags.find(tag => tag.ID == id)!.title )
-        window.electronAPI.open_google_chrome([...search_words,...filter_tag_words])
+        window.electronAPI.open_google_chrome([...filter_tag_words,...search_words])
     }
 
     const open_url = function() {
