@@ -8,6 +8,8 @@ import { exec } from 'child_process'
 const current_dir = os.homedir() + "/.tipl/"
 const LINKS_JSON_PATH = current_dir + "link.json"
 const TAGS_JSON_PATH = current_dir + "tags.json"
+const WINODW_BOUND_DATA = current_dir + "info.json"
+
 if(fs.existsSync(current_dir) == false){
     fs.mkdirSync(current_dir)
 }
@@ -17,7 +19,9 @@ if(fs.existsSync(TAGS_JSON_PATH) == false){
 if(fs.existsSync(LINKS_JSON_PATH) == false){
     fs.writeFileSync(LINKS_JSON_PATH,"[]")
 }
-
+if(fs.existsSync(WINODW_BOUND_DATA) == false){
+    fs.writeFileSync(WINODW_BOUND_DATA,"{\"width\": 800, \"height\": 1000}")
+}
 
 const mainURL = `file:${__dirname}/../../index.html`
 
@@ -32,15 +36,19 @@ const open_google_chrome = function(_:any,words:string[]){
     open_url(null,url)
 }
 
+const load_last_bounds = function() : Partial<Electron.Rectangle>{
+    return JSON.parse(fs.readFileSync(WINODW_BOUND_DATA, 'utf8')) as Partial<Electron.Rectangle>
+}
+
 const createWidnow = () => {
     const mainWindow = new BrowserWindow({
         title:"tipl",
-        width: 700,
-        height: 800,
         webPreferences: {
             preload: path.join(__dirname, "preload.js")
         }
     })
+
+    mainWindow.setBounds(load_last_bounds())
 
     ipcMain.handle('load-link-json',async () => fs.readFileSync(LINKS_JSON_PATH,'utf-8') )
     ipcMain.handle('load-tags-json',async () => fs.readFileSync(TAGS_JSON_PATH,'utf-8') )
@@ -49,6 +57,11 @@ const createWidnow = () => {
     
     ipcMain.handle('open-url',open_url)
     ipcMain.handle('open-google-chrome',open_google_chrome)
+
+    mainWindow.on('close', function() {
+        fs.writeFileSync(WINODW_BOUND_DATA, JSON.stringify(mainWindow.getBounds()));
+    });
+
     mainWindow.loadURL(mainURL)
 }
 
