@@ -91,6 +91,15 @@ export const LinkEditor = (p:LinkEditorProps) => {
         set_tag_selector_result_id_buf(null)
     },[tag_selector_result_id_buf])
 
+    useEffect(() => {
+        if(title_input_box.current == null)return
+        if(url_input_box.current == null)return
+
+        if(title_input_box.current.value != "" && url_input_box.current.value != ""){
+            set_can_save(true)
+        }
+    },[selected_tag_ids])
+
     return (
         <div>
             <input type="button" value="save" onClick={handle_save} /> <br />
