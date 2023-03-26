@@ -97,6 +97,11 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
                 p.set_is_show(false)
             }
         }
+
+        // Electronだとなぜかescでフォーカスが外れない
+        if(e.key == "Escape"){
+            search_word_box.current!.blur()
+        }
 	}
 
     const set_result = function(){
