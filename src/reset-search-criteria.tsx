@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Dispatch , SetStateAction} from 'react'
 import { useState } from 'react'
+import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
 
 export type ResetSearchCriteriaProps = {
     set_search_word:Dispatch<SetStateAction<string>>
@@ -24,6 +25,7 @@ export const ResetSearchCriteria = (p:ResetSearchCriteriaProps) => {
 
     useEffect(() => {
         document.addEventListener('keydown',(e) => {
+            if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
             if(
                 e.altKey == false &&
                 e.metaKey ==  false &&
