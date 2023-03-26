@@ -114,6 +114,16 @@ export const LinkEditor = (p:LinkEditorProps) => {
                     set_save_request(true)
                 } 
             }
+
+            if(
+                e.altKey == false &&
+                e.metaKey ==  false &&
+                e.ctrlKey ==  false&&
+                e.shiftKey ==  true){
+                if(e.key == "3"){
+                    hadnle_add_tag_btn()
+                }
+            }
         }) 
     },[])
 
@@ -131,7 +141,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
             <input type="text" className='editor-input-box' onChange={handle_onChange} ref={url_input_box}
             />
             <br />
-            <input type="button" value="add tag" onClick={hadnle_add_tag_btn}/>
+            <input type="button" value="add tag (shift + 3)" onClick={hadnle_add_tag_btn}/>
             <TagList {...tag_list_props}/>
             <TagSelectoor {...tag_selector_props}/>
         </div>
