@@ -6,8 +6,8 @@ import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { ChangeEvent } from 'react'
 import { Link } from './models/link'
-import { useHotkeys } from 'react-hotkeys-hook'
 import { OpenURL, OpenURLProps } from './open-url'
+import { HotkeyScapes , Hotkey_Scape } from './hotkeys'
 
 export type LinkFilterProps = {
     tags:Tag[]
@@ -74,8 +74,24 @@ export const LinkFilter = (p:LinkFilterProps) => {
         tags:p.tags
     }
 
-    useHotkeys("ctrl+/",focus_search_word_box)
-    useHotkeys("ctrl+3",() => set_tag_selector_is_show(true))
+    useEffect(() => {
+        document.addEventListener("keydown",(e) => {
+            if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
+            if(
+                e.altKey == false &&
+                e.metaKey ==  false &&
+                e.ctrlKey ==  true&&
+                e.shiftKey ==  false){
+                if(e.key == "/"){
+                    focus_search_word_box()
+                }
+                if(e.key == "3"){
+                    set_tag_selector_is_show(true)
+                }
+            }
+        })
+
+    },[])
     useEffect(() => {
         if(tag_selector_result_buf == null)return
         set_filter_tag_ids([...filter_tag_ids,tag_selector_result_buf])
@@ -96,8 +112,8 @@ export const LinkFilter = (p:LinkFilterProps) => {
     return (
         <div className='link-filter'>
             <OpenURL {...open_url_props} />
-            <input type="text" ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} /> <br />
-            <input type="button" value="add tag" onClick={ () => { set_tag_selector_is_show(true) }} />
+            <input type="text" ref={search_word_box} onChange={(e)=>set_search_word(e.target.value)} placeholder="ctrl + /"/> <br />
+            <input type="button" value="add tag (ctrl + 3)" onClick={ () => { set_tag_selector_is_show(true) }} />
             <TagList {...tag_list_props}/>
             <TagSelectoor {...tag_selector_props}/>
         </div>
