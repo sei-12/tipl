@@ -14,3 +14,29 @@
     padding: 2%;
 
 }
+
+:root{
+    --link-editor-base-size:min(50vw,50vh)
+}
+
+.link-editor-window{
+    position: absolute;
+    --height:0.8;
+    width: var(--link-editor-base-size);
+    height: calc( var(--height) * var(--link-editor-base-size));
+    top:calc((100vh - var(--height) * var(--link-editor-base-size)) / 2);
+    left:calc((100vw - var(--link-editor-base-size)) / 2);
+    background-color: rgb(20,20,20);
+    border-radius: calc( var(--link-editor-base-size) / 100);
+    box-shadow: 5px 5px 20px black;
+    
+}
+
+.bg-filter{
+    backdrop-filter: blur(3px);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

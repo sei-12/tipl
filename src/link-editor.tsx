@@ -180,30 +180,34 @@ export const LinkEditor = (p:LinkEditorProps) => {
         if( current_div.current == null ) return
         current_div.current.addEventListener("click",outside_click_cancel)
     },[])
+
     return (
-        <div className='bg-filter' ></div>
-            <input type="button" value="save (meta + s)" onClick={handle_save} /> <br />
-            <input 
-                type="text" 
-                className='editor-input-box' 
-                onChange={handle_onChange} 
-                ref={title_input_box}
-                onCompositionStart={startComposition}
-                onCompositionEnd={endComposition}
-            />
-            <input 
-                type="text" 
-                className='editor-input-box' 
-                onChange={handle_onChange} 
-                ref={url_input_box}
-                onCompositionStart={startComposition}
-                onCompositionEnd={endComposition}
-            />
-            
-            <br />
-            <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
-            <TagList {...tag_list_props}/>
-            <TagSelectoor {...tag_selector_props}/>
+        <div className='bg-filter' ref={current_div} >
+            <div  className="link-editor-window" >
+                <input type="button" value="save (Enter)" onClick={handle_save} /> <br />
+                <input 
+                    type="text" 
+                    className='editor-input-box' 
+                    onChange={handle_onChange} 
+                    ref={title_input_box}
+                    onCompositionStart={startComposition}
+                    onCompositionEnd={endComposition}
+                />
+                <input 
+                    type="text" 
+                    className='editor-input-box' 
+                    onChange={handle_onChange} 
+                    ref={url_input_box}
+                    onCompositionStart={startComposition}
+                    onCompositionEnd={endComposition}
+                />
+                
+                <br />
+                <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
+                <TagList {...tag_list_props}/>
+                <TagSelectoor {...tag_selector_props}/>
+            </div>
         </div>
+        
     )
 }
