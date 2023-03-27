@@ -177,19 +177,14 @@ export const LinkEditor = (p:LinkEditorProps) => {
         set_result_buf:set_warning_dialog_result_buf
     }
 
-    useEffect(() => {
-        if(p.focus_link_id == null){
-            title_input_box.current!.value = ""
-            url_input_box.current!.value = ""
-            set_selected_tag_ids([])
-        }else{
-            let link = p.links.find(link => link.ID == p.focus_link_id)
-            if(link == undefined) throw Error("バグ")
-            title_input_box.current!.value = link.title
-            url_input_box.current!.value = link.url
-            set_selected_tag_ids([...link.tag_ids])
-        }
-    },[p.focus_link_id])
+    // todo rename
+    const set_contents = function(){
+        let link = p.links.find(link => link.ID == p.focus_link_id)
+        if(link == undefined) throw Error("バグ")
+        title_input_box.current!.value = link.title
+        url_input_box.current!.value = link.url
+        set_selected_tag_ids([...link.tag_ids])
+    }
 
     useEffect(() => {
         if(tag_selector_result_id_buf == null)return
@@ -248,6 +243,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
         if( current_div.current == null ) return
         if(p.is_show){
             if(p.focus_link_id == null) return
+            set_contents()
             Hotkey_Scape.set(HotkeyScapes.LinkPrompt)
             current_div.current.style.display = 'block'
         }else{
