@@ -254,7 +254,10 @@ export const LinkEditor = (p:LinkEditorProps) => {
     useEffect(() => {
         if( current_div.current == null ) return
         if(p.is_show){
-            if(p.focus_link_id == null) return
+            if(p.focus_link_id == null){
+                p.set_is_show(false)
+                return
+            }
             set_contents()
             Hotkey_Scape.set(HotkeyScapes.LinkPrompt)
             current_div.current.style.display = 'block'
