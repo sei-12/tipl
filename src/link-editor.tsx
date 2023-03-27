@@ -130,6 +130,10 @@ export const LinkEditor = (p:LinkEditorProps) => {
     }
 
     const has_change = () => {
+        // セーブする時点でIDが変わっている場合を考慮する必要があるかもしれない
+        // focus_link_idがポップアップウィンドウ表示中に変更された場合はバグになる
+        // 今のところ表示中にfocus_link_idが変わること事体がバグ
+        
         let link : Link = p.links.find(link=>link.ID == p.focus_link_id)!
         if(array_equal(link.tag_ids,selected_tag_ids) == false)return true
         if(link.title   != title_input_box.current!.value)     return true
