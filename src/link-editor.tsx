@@ -53,6 +53,13 @@ export const LinkEditor = (p:LinkEditorProps) => {
         set_tag_selector_is_show(true)
     }
 
+    const has_change = function(){
+        let link : Link = p.links.find(link=>link.ID == p.focus_link_id)!
+        if(link.tag_ids != selected_tag_ids)              return true
+        if(link.title   != title_input_box.current!.value) return true
+        if(link.url     != url_input_box  .current!.value) return true
+        return false
+    }
     const [isComposing, setComposition] = useState(false);
     const startComposition = () => setComposition(true);
     const endComposition = () => setComposition(false);
