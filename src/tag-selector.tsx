@@ -44,6 +44,8 @@ export type TagSelectoorProps = {
     set_result_id_buf:Dispatch<SetStateAction<number | null>>
 }
 
+let last_scape : symbol | null = null
+
 export const TagSelectoor = (p:TagSelectoorProps) => {
     const cursor_down = () => {
 		if(filted_items.length == 0){
@@ -162,7 +164,8 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
             }
 
             await lag()
-            Hotkey_Scape.set(HotkeyScapes.Normal)
+            Hotkey_Scape.set(last_scape!)
+            last_scape = null
         })()
 	}
 
@@ -191,6 +194,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 			window_div.current!.style.display = "block"
 			search_word_box.current!.focus()
             wrap_set_filted_items(p.tags,"")
+            last_scape = Hotkey_Scape.get()
             Hotkey_Scape.set(HotkeyScapes.TagSelector)
 		}else{
 			hide_window_process()
