@@ -26,7 +26,7 @@ if(fs.existsSync(WINODW_BOUND_DATA) == false){
 const mainURL = `file:${__dirname}/../../index.html`
 
 const open_url = function(_:any,url:string){
-    let cmd = `open ${url}`
+    let cmd = `open \"${url}\"`
     exec(cmd)
 }
 
