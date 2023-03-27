@@ -82,6 +82,14 @@ const WarningDialog = (p:WarningDialogProps) => {
     )
 }
 
+function array_equal(a:any[], b:any[]) {
+    if (a.length != b.length) return false;
+
+    for (var i = 0, n = a.length; i < n; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
 
 export const LinkEditor = (p:LinkEditorProps) => {
     const handle_onChange = function(e:ChangeEvent<HTMLInputElement>){
@@ -121,26 +129,14 @@ export const LinkEditor = (p:LinkEditorProps) => {
         set_tag_selector_is_show(true)
     }
 
-    const has_change = function(){
+    const has_change = () => {
         let link : Link = p.links.find(link=>link.ID == p.focus_link_id)!
-        if(link.tag_ids != selected_tag_ids)              return true
-        if(link.title   != title_input_box.current!.value) return true
-        if(link.url     != url_input_box  .current!.value) return true
+        if(array_equal(link.tag_ids,selected_tag_ids) == false)return true
+        if(link.title   != title_input_box.current!.value)     return true
+        if(link.url     != url_input_box  .current!.value)     return true
         return false
     }
 
-    // async?
-    const handle_cancel = async function(){
-        if(has_change()){
-            // 警告を表示
-            // 破棄して終了|終了しない
-
-            // let result = await dialog()
-            // if(result == "終了しない")return
-        }
-
-        p.set_is_show(false)
-    }
 
     const [isComposing, setComposition] = useState(false);
     const startComposition = () => setComposition(true);
