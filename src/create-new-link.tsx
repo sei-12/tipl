@@ -22,6 +22,7 @@ export type CreateNewLinkProps = {
 	set_links:Dispatch<SetStateAction<Link[]>>
 	set_focus_link_id:Dispatch<SetStateAction<number | null>>
     set_link_editor_is_show:Dispatch<SetStateAction<boolean>>
+    set_reset_search_criteria_request:Dispatch<SetStateAction<boolean>>
 }
 
 export const CreateNewLink = (p:CreateNewLinkProps) => {
@@ -43,6 +44,9 @@ export const CreateNewLink = (p:CreateNewLinkProps) => {
             tag_ids:[]
         }
         p.set_links([...p.links,new_link])
+
+        // フォーカスの前に検索条件をリセットする必要がある
+        p.set_reset_search_criteria_request(true)
 
         // タイムラグをつけて実行しないとフォーカスされない
         ;(async () => {

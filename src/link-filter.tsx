@@ -16,6 +16,11 @@ export type LinkFilterProps = {
     filted_links:Link[]
     set_filted_links:Dispatch<SetStateAction<Link[]>>
     focus_link_id:number | null
+
+    //>>>>>
+    reset_search_criteria_request:boolean
+    set_reset_search_criteria_request:Dispatch<SetStateAction<boolean>>
+    //<<<<<
 }
 
 export const LinkFilter = (p:LinkFilterProps) => {
@@ -78,7 +83,12 @@ export const LinkFilter = (p:LinkFilterProps) => {
     const reset_search_criteria_props : ResetSearchCriteriaProps = {
         set_search_word:set_search_word,
         set_tag_ids:set_filter_tag_ids,
-        search_word_box:search_word_box
+        search_word_box:search_word_box,
+
+        //>>>>>
+        request:p.reset_search_criteria_request,
+        set_request:p.set_reset_search_criteria_request
+        //<<<<<
     }
 
     useEffect(() => {

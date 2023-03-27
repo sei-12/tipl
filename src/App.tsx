@@ -25,6 +25,10 @@ function App() {
 	const [focus_link_id,set_focus_link_id] = useState<number | null> (null)
 	const [link_editor_is_show,set_link_editor_is_show] = useState<boolean>(false)
 
+	//>>>>>
+	const [reset_search_criteria_request,set_reset_search_criteria_request] = useState<boolean>(false)
+	//<<<<<
+
 	/// PROPS
 	const link_list_props : LinkListProps = {
 		focus_link_id:focus_link_id,
@@ -38,6 +42,7 @@ function App() {
 	}
 
 	const create_new_link_props : CreateNewLinkProps = {
+		set_reset_search_criteria_request:set_reset_search_criteria_request,
 		set_focus_link_id:set_focus_link_id,
 		links:links,
 		set_links:set_links,
@@ -49,7 +54,12 @@ function App() {
 		tags:tags,
 		links:links,
 		filted_links:filted_links,
-		set_filted_links:set_filted_links
+		set_filted_links:set_filted_links,
+
+		//>>>>>
+		reset_search_criteria_request:reset_search_criteria_request,
+		set_reset_search_criteria_request:set_reset_search_criteria_request
+		//<<<<<
 	}
 
 	const edit_link_btn : EditLinkBtnProps = {

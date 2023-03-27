@@ -7,6 +7,11 @@ export type ResetSearchCriteriaProps = {
     set_search_word:Dispatch<SetStateAction<string>>
     set_tag_ids:Dispatch<SetStateAction<number[]>>
     search_word_box:React.RefObject<HTMLInputElement>
+
+    //>>>>>
+    request:boolean
+    set_request:Dispatch<SetStateAction<boolean>>
+    //<<<<<
 }
 
 export const ResetSearchCriteria = (p:ResetSearchCriteriaProps) => {
@@ -22,6 +27,14 @@ export const ResetSearchCriteria = (p:ResetSearchCriteriaProps) => {
         reset()
         set_reset_request(false)
     },[reset_request])
+
+    //>>>>>
+    useEffect(() => {
+        if(p.request == false) return
+        reset()
+        p.set_request(false)
+    },[p.request])
+    //<<<<<
 
     useEffect(() => {
         document.addEventListener('keydown',(e) => {
