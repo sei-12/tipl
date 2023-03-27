@@ -32,13 +32,12 @@ export const DeleteLink = (p:DeleteLinkProps) => {
     const [delete_request,set_delete_request] = useState<boolean>(false)
 
     const hotkey = (e:KeyboardEvent) => {
-        console.log(e.key)
         if(
             e.altKey == false &&
             e.metaKey ==  true &&
             e.ctrlKey ==  false&&
             e.shiftKey ==  false &&
-            e.key == "Backspace"){
+            e.key == "d"){
             set_delete_request(true)
         }
     }
@@ -54,7 +53,7 @@ export const DeleteLink = (p:DeleteLinkProps) => {
     },[])
     return (
         <div>
-            <input type="button" value="delete link (meta + backspace)" onClick={delete_link} />
+            <input type="button" value="delete link (cmd + d)" onClick={delete_link} />
         </div>
     )
 }
