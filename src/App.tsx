@@ -23,10 +23,6 @@ function App() {
 	const [filted_links, set_filted_links] = useState<Link[]>([])
 	const [links , set_links ] = useState<Link[]>([])
 	const [focus_link_id,set_focus_link_id] = useState<number | null> (null)
-
-	// 変数の階層?を変えれる
-	// link editorをリンクリストに移動できるはず
-	// 後で
 	const [link_editor_is_show,set_link_editor_is_show] = useState<boolean>(false)
 
 	/// PROPS
@@ -44,7 +40,8 @@ function App() {
 	const create_new_link_props : CreateNewLinkProps = {
 		set_focus_link_id:set_focus_link_id,
 		links:links,
-		set_links:set_links
+		set_links:set_links,
+		set_link_editor_is_show:set_link_editor_is_show
 	}
 
 	const link_filter_props : LinkFilterProps = {

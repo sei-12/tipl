@@ -21,6 +21,7 @@ export type CreateNewLinkProps = {
     links:Link[]
 	set_links:Dispatch<SetStateAction<Link[]>>
 	set_focus_link_id:Dispatch<SetStateAction<number | null>>
+    set_link_editor_is_show:Dispatch<SetStateAction<boolean>>
 }
 
 export const CreateNewLink = (p:CreateNewLinkProps) => {
@@ -55,6 +56,16 @@ export const CreateNewLink = (p:CreateNewLinkProps) => {
             p.set_focus_link_id(new_link.ID)
         })()
         // タイムラグをつけて実行しないとフォーカスされない
+        ;(async () => {
+            async function lag(){
+                return new Promise((resolve) => {
+                    setTimeout(() => resolve(null),10)
+                })
+            }
+
+            await lag()
+            p.set_link_editor_is_show(true)
+        })()
         
         set_create_reqest(false)
     },[create_reqest])
