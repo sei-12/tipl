@@ -11,6 +11,7 @@ import { CreateNewTag,CreateNewTagProps } from './create-new-tag';
 import { CreateNewLink, CreateNewLinkProps } from './create-new-link';
 import { MoveFocus, MoveFocusProps } from './move-focus';
 import { EditLinkBtn, EditLinkBtnProps } from './edit-link';
+import { DeleteLink, DeleteLinkProps } from './delete-link';
 
 
 let loaded_links = false
@@ -82,6 +83,14 @@ function App() {
 		focus_link_id:focus_link_id
 	}
 
+	const delete_link_props : DeleteLinkProps = {
+		focus_link_id:focus_link_id,
+		links:links,
+		set_links:set_links,
+		filted_links:filted_links,
+		set_focus_id:set_focus_link_id
+	}
+
 
 	// DATA FILE
 	useEffect(() => {
@@ -123,7 +132,7 @@ function App() {
 			
 			<div className='left'>
 				<LinkFilter {...link_filter_props}/>
-				
+				<DeleteLink {...delete_link_props}/>				
 				<CreateNewTag {...create_new_tag_props} />
 				<CreateNewLink {...create_new_link_props}/>
 				<LinkEditor {...link_editor_props} />
