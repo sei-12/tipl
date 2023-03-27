@@ -128,6 +128,20 @@ export const LinkEditor = (p:LinkEditorProps) => {
         if(link.url     != url_input_box  .current!.value) return true
         return false
     }
+
+    // async?
+    const handle_cancel = async function(){
+        if(has_change()){
+            // 警告を表示
+            // 破棄して終了|終了しない
+
+            // let result = await dialog()
+            // if(result == "終了しない")return
+        }
+
+        p.set_is_show(false)
+    }
+
     const [isComposing, setComposition] = useState(false);
     const startComposition = () => setComposition(true);
     const endComposition = () => setComposition(false);
@@ -140,6 +154,8 @@ export const LinkEditor = (p:LinkEditorProps) => {
     const [tag_selector_result_id_buf,set_tag_selector_result_id_buf] = useState<number | null>(null)
     const [save_request,set_save_request] = useState<boolean>(false)
     const [add_tag_request,set_add_tag_request] = useState(false)
+    const [warning_dialog_is_show,set_warning_dialog_is_show] = useState<boolean>(false)
+    const [warning_dialog_result_buf,set_warning_dialog_result_buf] = useState<string | null>(null)
 
     const tag_list_props : TagListProps = {
         tags:p.tags,
@@ -153,6 +169,12 @@ export const LinkEditor = (p:LinkEditorProps) => {
         tags:p.tags,
         exclude_ids:selected_tag_ids,
         set_result_id_buf:set_tag_selector_result_id_buf
+    }
+
+    const warning_dialog_props : WarningDialogProps = {
+        is_show:warning_dialog_is_show,
+        set_is_show:set_warning_dialog_is_show,
+        set_result_buf:set_warning_dialog_result_buf
     }
 
     useEffect(() => {
@@ -281,6 +303,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
                 <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
                 <TagList {...tag_list_props}/>
                 <TagSelectoor {...tag_selector_props}/>
+                <WarningDialog {...warning_dialog_props}/>
             </div>
         </div>
         
