@@ -261,6 +261,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
             set_contents()
             Hotkey_Scape.set(HotkeyScapes.LinkPrompt)
             current_div.current.style.display = 'block'
+            title_input_box.current!.focus()
         }else{
             current_div.current.style.display = 'none'
 
