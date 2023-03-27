@@ -38,6 +38,7 @@ const WarningDialog = (p:WarningDialogProps) => {
     const current_div = useRef<HTMLDivElement>(null)
 
     const hotkey = (e:KeyboardEvent) => {
+        if([HotkeyScapes.LinkPromptWarningDialog].includes(Hotkey_Scape.get()) == false) return
         if(e.key == "Enter"){
             done()
         }
@@ -143,7 +144,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
         // セーブする時点でIDが変わっている場合を考慮する必要があるかもしれない
         // focus_link_idがポップアップウィンドウ表示中に変更された場合はバグになる
         // 今のところ表示中にfocus_link_idが変わること事体がバグ
-        
+
         let link : Link = p.links.find(link=>link.ID == p.focus_link_id)!
         if(array_equal(link.tag_ids,selected_tag_ids) == false)return true
         if(link.title   != title_input_box.current!.value)     return true
@@ -166,6 +167,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
     const [add_tag_request,set_add_tag_request] = useState(false)
     const [warning_dialog_is_show,set_warning_dialog_is_show] = useState<boolean>(false)
     const [warning_dialog_result_buf,set_warning_dialog_result_buf] = useState<string | null>(null)
+    const [cancel_request,set_cancel_request] = useState<boolean>(false)
 
     const tag_list_props : TagListProps = {
         tags:p.tags,
@@ -272,11 +274,35 @@ export const LinkEditor = (p:LinkEditorProps) => {
         }
     },[p.is_show])
 
+
+    /////綺麗ではない方法--------------------------------
+    useEffect(() => {
+        if( cancel_request == false ) return
+        if(has_change()){
+            set_warning_dialog_is_show(true)
+        }else{
+            p.set_is_show(false)
+        }
+        set_cancel_request(false)
+    },[cancel_request])
+
+    useEffect(() => {
+        if(warning_dialog_result_buf == null) return
+        if(warning_dialog_result_buf == "done"){
+            p.set_is_show(false)
+        }
+        set_warning_dialog_result_buf(null)
+
+    },[warning_dialog_result_buf])
+    /////綺麗ではない方法--------------------------------
+
+
+
     // ポップアップウィンドウ以外の場所をクリックしたら入力をキャンセル
     const outside_click_cancel = (e:Event) => {
         if( current_div.current == null ) return
         if( e.target != current_div.current) return
-        handle_cancel()  
+        set_cancel_request(true)
     }
 
     useEffect(() => {
@@ -309,8 +335,8 @@ export const LinkEditor = (p:LinkEditorProps) => {
                 <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
                 <TagList {...tag_list_props}/>
                 <TagSelectoor {...tag_selector_props}/>
-                <WarningDialog {...warning_dialog_props}/>
             </div>
+            <WarningDialog {...warning_dialog_props}/>
         </div>
         
     )
