@@ -37,7 +37,13 @@ const open_google_chrome = function(_:any,words:string[]){
 }
 
 const load_last_bounds = function() : Partial<Electron.Rectangle>{
-    return JSON.parse(fs.readFileSync(WINODW_BOUND_DATA, 'utf8')) as Partial<Electron.Rectangle>
+    let bound : Partial<Electron.Rectangle>
+    try{
+        bound = JSON.parse(fs.readFileSync(WINODW_BOUND_DATA, 'utf8')) as Partial<Electron.Rectangle>
+    }catch{
+        bound = {width:500,height:300}
+    }
+    return 
 }
 
 const createWidnow = () => {
