@@ -111,6 +111,16 @@ export const LinkEditor = (p:LinkEditorProps) => {
             return
         }
 
+        if(has_change() == false){
+            p.set_is_show(false)
+            return
+        }
+
+        // has changeの中にはfindがある
+        // 同じものを2回検索していることになる
+        // has changeを修正した方がいい
+        // has_change(last_link:Link) => boolean
+
         let buf = p.links
         let index = buf.findIndex(link => link.ID == p.focus_link_id)
 
