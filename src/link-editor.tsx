@@ -220,7 +220,7 @@ export const LinkEditor = (p:LinkEditorProps) => {
             if(
                 e.altKey == false &&
                 e.metaKey ==  false &&
-                e.ctrlKey ==  false&&
+                e.ctrlKey ==  true&&
                 e.shiftKey ==  false){
                 if(e.key == "Enter" && isComposing == false){
                     set_save_request(true)
@@ -338,8 +338,8 @@ export const LinkEditor = (p:LinkEditorProps) => {
                     />
                 </div>
                 <br />
-                <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
-                <input type="button" value="save (Enter)" onClick={handle_save} /> <br />
+                <input type="button" value="add tag (ctrl + 3)" onClick={hadnle_add_tag_btn}/>
+                <input type="button" value="save (ctrl + Enter)" onClick={handle_save} /> <br />
                 <TagList {...tag_list_props}/>
                 <TagSelectoor {...tag_selector_props}/>
             </div>
