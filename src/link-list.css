@@ -7,6 +7,7 @@
     margin-left:3%;
     width: var(--base-size);
     color: white;
+    padding: 1%;
 }
 
 .focus-item{

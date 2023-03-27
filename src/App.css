@@ -13,9 +13,11 @@
 	height: 100vh;
 	background-color: rgb(30, 30, 35);
 	box-shadow: 5px 5px 20px black;
+	overflow:hidden;
 }
 
 .right{
+	overflow: hidden;
 	width: 70vw;
 	height: 100vh;
 }
