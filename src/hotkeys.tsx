@@ -29,6 +29,7 @@ export class HotkeyScapes{
     static Prompt = Symbol("prompt")
     static TagSelector = Symbol("tag-selector")    
     static LinkPrompt = Symbol('link-prompt')
+    static LinkPromptWarningDialog = Symbol('link-prompt-warning-dialog')
 }
 
 class HotkeyScape{

@@ -5,6 +5,7 @@ import { Tag } from './models/tag'
 import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
+
 export type LinkEditorProps = {
     is_show:boolean
     set_is_show:Dispatch<SetStateAction<boolean>>
@@ -14,6 +15,73 @@ export type LinkEditorProps = {
     set_tags:Dispatch<SetStateAction<Tag[]>>
     focus_link_id:number | null
 }
+
+// ダイアログは再利用可能な形で実装できるかもだが
+type WarningDialogProps = {
+    is_show:boolean
+    set_is_show:Dispatch<SetStateAction<boolean>>
+    set_result_buf:Dispatch<SetStateAction<string | null>>
+}
+
+const WarningDialog = (p:WarningDialogProps) => {
+
+    const cancel = function(){
+        p.set_result_buf("cancel")
+        p.set_is_show(false)
+    }
+
+    const done = function(){
+        p.set_result_buf("done")
+        p.set_is_show(false)
+    }
+
+    const current_div = useRef<HTMLDivElement>(null)
+
+    const hotkey = (e:KeyboardEvent) => {
+        if(e.key == "Enter"){
+            done()
+        }
+        if(e.key == "Escpace"){
+            cancel()
+        }    
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown",hotkey)
+    },[])
+
+    useEffect(() => {
+        if( current_div.current == null ) return
+        if(p.is_show){
+            Hotkey_Scape.set(HotkeyScapes.LinkPromptWarningDialog)
+            current_div.current.style.display = 'block'
+        }else{
+            current_div.current.style.display = 'none'
+
+            ;(async () => {
+                async function lag(){
+                    return new Promise((resolve) => {
+                        setTimeout(() => resolve(null),10)
+                    })
+                }
+            
+                await lag()
+                Hotkey_Scape.set(HotkeyScapes.LinkPrompt)
+            })()            
+        }
+    },[p.is_show])
+
+    return (
+        <div ref={current_div} className="bg-filter" >
+            <div className='warning-dialog' >
+                <div>変更があります</div>
+                <input type="button" value="キャンセル" onClick={cancel} />
+                <input type="button" value="破棄して終了" onClick={done} />
+           </div>
+        </div>
+    )
+}
+
 
 export const LinkEditor = (p:LinkEditorProps) => {
     const handle_onChange = function(e:ChangeEvent<HTMLInputElement>){
