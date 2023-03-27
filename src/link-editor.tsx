@@ -316,26 +316,29 @@ export const LinkEditor = (p:LinkEditorProps) => {
     return (
         <div className='bg-filter' ref={current_div} >
             <div  className="link-editor-window" >
-                <input type="button" value="save (Enter)" onClick={handle_save} /> <br />
-                <input 
-                    type="text" 
-                    className='editor-input-box' 
-                    onChange={handle_onChange} 
-                    ref={title_input_box}
-                    onCompositionStart={startComposition}
-                    onCompositionEnd={endComposition}
-                />
-                <input 
-                    type="text" 
-                    className='editor-input-box' 
-                    onChange={handle_onChange} 
-                    ref={url_input_box}
-                    onCompositionStart={startComposition}
-                    onCompositionEnd={endComposition}
-                />
-                
+                <div className='input-wrap'>
+                    <div><p>title</p></div><input 
+                        type="text" 
+                        className='editor-input-box' 
+                        onChange={handle_onChange} 
+                        ref={title_input_box}
+                        onCompositionStart={startComposition}
+                        onCompositionEnd={endComposition}
+                    />
+                </div>
+                <div className='input-wrap'>
+                    <div><p>url</p></div><input 
+                        type="text" 
+                        className='editor-input-box' 
+                        onChange={handle_onChange} 
+                        ref={url_input_box}
+                        onCompositionStart={startComposition}
+                        onCompositionEnd={endComposition}
+                    />
+                </div>
                 <br />
                 <input type="button" value="add tag (ctrl + 4)" onClick={hadnle_add_tag_btn}/>
+                <input type="button" value="save (Enter)" onClick={handle_save} /> <br />
                 <TagList {...tag_list_props}/>
                 <TagSelectoor {...tag_selector_props}/>
             </div>

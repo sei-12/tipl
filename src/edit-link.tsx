@@ -27,6 +27,7 @@ export const EditLinkBtn = (p:EditLinkBtnProps) => {
 
     useEffect(() => {
         if( edit_request == false ) return
+        
         p.set_link_editor_is_show(true)
         set_edit_request(false)        
     },[edit_request])
