@@ -168,8 +168,19 @@ export const LinkEditor = (p:LinkEditorProps) => {
         }
     },[p.is_show])
 
+    // ポップアップウィンドウ以外の場所をクリックしたら入力をキャンセル
+    const outside_click_cancel = (e:Event) => {
+        if( current_div.current == null ) return
+        if( e.target != current_div.current) return
+        handle_cancel()  
+    }
+
+    useEffect(() => {
+        if( current_div.current == null ) return
+        current_div.current.addEventListener("click",outside_click_cancel)
+    },[])
     return (
-        <div ref={current_div} >
+        <div className='bg-filter' ></div>
             <input type="button" value="save (meta + s)" onClick={handle_save} /> <br />
             <input 
                 type="text" 
