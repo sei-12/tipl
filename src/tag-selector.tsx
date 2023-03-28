@@ -45,6 +45,7 @@ export type TagSelectoorProps = {
 }
 
 let last_scape : symbol | null = null
+let last_search_word : string = ""
 
 export const TagSelectoor = (p:TagSelectoorProps) => {
     const cursor_down = () => {
@@ -131,7 +132,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 			filted_items_buf = filted_items_buf.filter( tag => { 
 				return tag.title.includes(word)
 			})
-		}) 
+		})
         set_filted_items([...filted_items_buf])
     }
 
@@ -143,7 +144,7 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
         }else{
             wrap_set_filted_items(p.tags,e.target.value)
         }
-        set_last_search_word(e.target.value)
+        last_search_word = e.target.value
 	}
     
 
@@ -184,8 +185,6 @@ export const TagSelectoor = (p:TagSelectoorProps) => {
 	const endComposition = () => setComposition(false);
     const [focus_item,set_focus_item] = useState<Tag|null>(null)
     const [filted_items,set_filted_items] = useState<Tag[]>([])
-    // 再レンダリングの必要なないがどうしたらいいのかわからない
-    const [last_search_word,set_last_search_word] = useState("")
     const search_word_box = useRef<HTMLInputElement>(null)
     const window_div = useRef<HTMLDivElement>(null)
 
