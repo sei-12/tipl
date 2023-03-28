@@ -13,15 +13,6 @@ export type DeleteLinkProps = {
 
 export const DeleteLink = (p:DeleteLinkProps) => {
 
-    // linksが更新されると検索条件がクリアされてしまう
-    // const calc_next_focus_id = function() : number{
-    //     let index = p.filted_links.findIndex(link => link.ID == p.focus_link_id) - 1
-    //     if(index < 0){
-    //         index = 0
-    //     }
-    //     return p.filted_links[index].ID
-    // }
-
     const delete_link = function(){
         if( p.focus_link_id == null ) return
         let new_links = p.links.filter(link => link.ID != p.focus_link_id)
