@@ -17,6 +17,13 @@ export const CreateNewTag = (p:CreateNewTagProps) => {
 		return links_tags[links_tags.length - 1].ID + 1
 	}
 
+	const tag_exists = function(tag_title:string) : boolean{
+		if(p.tags.findIndex(tag => tag.title == tag_title) == -1){
+			return false
+		}else{
+			return true
+		}
+	}
 
 
 	const create_new_tag = () => {
@@ -48,6 +55,12 @@ export const CreateNewTag = (p:CreateNewTagProps) => {
 
 	useEffect(() => {
 		if(prompt_result_buf == null || prompt_result_buf == "") return
+		
+		if(tag_exists(prompt_result_buf)){
+			alert(prompt_result_buf + "はすでに存在します")
+			return
+		}
+
 		let id = next_id(p.tags)
 		let new_tag : Tag = {
 			ID:id,
