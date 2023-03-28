@@ -7,6 +7,8 @@ export interface IElectronAPI {
 
     open_url:(url:string) => void
     open_google_chrome:(words:string[]) => void
+
+    onActivateApp:(callback:() => void) => void,
 }
 
 declare global {

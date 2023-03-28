@@ -68,6 +68,10 @@ const createWidnow = () => {
         fs.writeFileSync(WINODW_BOUND_DATA, JSON.stringify(mainWindow.getBounds()));
     });
 
+    app.on('browser-window-focus',() =>{
+        mainWindow.webContents.send('active-app')
+    })
+
     mainWindow.loadURL(mainURL)
 }
 

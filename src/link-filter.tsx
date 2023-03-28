@@ -109,6 +109,17 @@ export const LinkFilter = (p:LinkFilterProps) => {
         })
 
     },[])
+
+    useEffect(() => {
+        window.electronAPI.onActivateApp(() => {
+            if(search_word_box.current == null)return
+            search_word_box.current.focus()
+        })
+        // アプリが起動した時にはイベントが来ないため
+        if(search_word_box.current == null) return
+        search_word_box.current.focus()
+    },[])
+
     useEffect(() => {
         if(tag_selector_result_buf == null)return
         set_filter_tag_ids([...filter_tag_ids,tag_selector_result_buf])

@@ -10,4 +10,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
     open_url:(url:string) => ipcRenderer.invoke('open-url',url),
     open_google_chrome:(words:string[]) => ipcRenderer.invoke('open-google-chrome',words),
+    onActivateApp:(callback:() => void) => ipcRenderer.on('active-app',callback),
 })
