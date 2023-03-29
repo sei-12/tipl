@@ -9,6 +9,7 @@ const current_dir = os.homedir() + "/.tipl/"
 const LINKS_JSON_PATH = current_dir + "link.json"
 const TAGS_JSON_PATH = current_dir + "tags.json"
 const WINODW_BOUND_DATA = current_dir + "info.json"
+const PREF_JSON_PATH = current_dir + "pref.json"
 
 if(fs.existsSync(current_dir) == false){
     fs.mkdirSync(current_dir)
@@ -22,7 +23,11 @@ if(fs.existsSync(LINKS_JSON_PATH) == false){
 if(fs.existsSync(WINODW_BOUND_DATA) == false){
     fs.writeFileSync(WINODW_BOUND_DATA,"{\"width\": 800, \"height\": 1000}")
 }
+if(fs.existsSync(PREF_JSON_PATH) == false){
+    fs.writeFileSync(PREF_JSON_PATH,"{}")
+}
 
+const DEFAULT_PLEF_JSON_PATH = `file:${__dirname}/../../default-pref.json`
 const mainURL = `file:${__dirname}/../../index.html`
 const prefURL = mainURL + "#/pref"
 
