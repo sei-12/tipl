@@ -24,6 +24,7 @@ if(fs.existsSync(WINODW_BOUND_DATA) == false){
 }
 
 const mainURL = `file:${__dirname}/../../index.html`
+const prefURL = mainURL + "#/pref"
 
 const open_url = function(_:any,url:string){
     let cmd = `open \"${url}\"`
@@ -73,6 +74,16 @@ const createWidnow = () => {
     })
 
     mainWindow.loadURL(mainURL)
+    create_pref_window()
+}
+
+const create_pref_window = () => {
+    const pref_window = new BrowserWindow({
+        width:400,
+        height:200
+    })
+
+    pref_window.loadURL(prefURL)
 }
 
 app.whenReady().then(() => {
