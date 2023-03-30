@@ -6,7 +6,12 @@ export type Hotkey = {
     key:string
 }
 
-//todo rename
+/**
+ * 指定された KeyboardEvent が指定された Hotkey と一致するかどうかを返します。
+ * @param e KeyboardEventオブジェクト
+ * @param hotkey Hotkeyオブジェクト
+ * @returns KeyboardEventがHotkeyに一致する場合はtrue、それ以外の場合はfalse
+ */
 export const is_hotkey_match = function(e:KeyboardEvent,pref_hotkey:Hotkey) : boolean{
     if(e.altKey !== pref_hotkey.alt){
         return false
@@ -57,6 +62,13 @@ const is_pref = function(check_pref:any) : boolean {
     return true
 }
 
+/**
+ * 指定された設定ファイルを解析し、解析された設定情報をPrefオブジェクトとして返します。
+ * 設定ファイルが正常に解析できなかった場合は、デフォルトの設定情報を使用します。
+ * @param pref_json 解析する設定ファイルのJSON文字列
+ * @param default_pref_json デフォルトの設定ファイルのJSON文字列
+ * @returns 解析された設定情報を表すPrefオブジェクト
+ */
 export const parse_pref = function(pref_json:string,default_pref_json:string) : Pref{
     let pref = JSON.parse(pref_json)
 
