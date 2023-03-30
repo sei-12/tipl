@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { parse_pref, Pref } from '../models/pref'
+import { parse_pref, Pref } from '../models/pref-model'
 
 export const PreferenceApp = () => {
     const [pref,set_pref] = useState<Pref | null>(null)
