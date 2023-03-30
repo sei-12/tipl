@@ -1,9 +1,9 @@
 import React ,{useEffect,useState} from 'react'
-import { Link } from './models/link'
+import { Link } from '../models/link'
 import { Dispatch , SetStateAction} from 'react'
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
 import './move-focus.css'
-import { is_hotkey_match } from './models/pref-model'
+import { is_hotkey_match } from '../models/pref-model'
 import { preference } from './preference'
 export type MoveFocusProps = {
     filted_links:Link[],

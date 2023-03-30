@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from './models/link'
-import { Tag } from './models/tag'
+import { Link } from '../models/link'
+import { Tag } from '../models/tag'
 import { useEffect } from 'react'
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
 import { useState } from 'react'

@@ -3,8 +3,8 @@ import './App.css';
 import { LinkEditor, LinkEditorProps } from './link-editor';
 import { LinkFilter, LinkFilterProps } from './link-filter';
 import { LinkList, LinkListProps } from './link-list';
-import { Link } from './models/link';
-import { Tag } from './models/tag';
+import { Link } from '../models/link';
+import { Tag } from '../models/tag';
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 import { CreateNewTag,CreateNewTagProps } from './create-new-tag';

@@ -1,6 +1,6 @@
-import { Tag } from "./models/tag"
+import { Tag } from "../models/tag"
 import { Dispatch , SetStateAction} from 'react'
-import { Link } from "./models/link"
+import { Link } from "../models/link"
 import { useState,useEffect } from "react"
 import { Prompt,PromptProps } from "./prompt"
 import { HotkeyScapes,Hotkey_Scape } from "./hotkeys"

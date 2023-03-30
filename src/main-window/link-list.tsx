@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
-import { Link } from "./models/link";
+import { Link } from "../models/link";
 import './link-list.css'
 import { useState } from "react";
 

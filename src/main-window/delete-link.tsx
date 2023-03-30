@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from './models/link'
+import { Link } from '../models/link'
 import { Dispatch , SetStateAction} from 'react'
 import { useState } from 'react'
 

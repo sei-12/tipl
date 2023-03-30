@@ -1,5 +1,5 @@
 
-import { parse_pref, Pref } from "./models/pref-model";
+import { parse_pref, Pref } from "../models/pref-model";
 
 export let preference : Pref | null = null
 

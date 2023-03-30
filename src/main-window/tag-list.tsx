@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction ,useState, useRef, useEffect} from 'react'
-import { Tag } from './models/tag'
+import { Tag } from '../models/tag'
 import './tag-list.css'
 
 type Position2D = {

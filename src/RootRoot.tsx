@@ -1,6 +1,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import React from 'react'
-import App from "./App";
+import App from "./main-window/App";
 import { PreferenceApp } from "./preference/PrefApp";
 
 export const RootRoot = () => {
