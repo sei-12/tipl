@@ -3,6 +3,8 @@ import { Link } from './models/link'
 import { Dispatch , SetStateAction} from 'react'
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
 import './move-focus.css'
+import { is_hotkey_match } from './models/pref-model'
+import { preference } from './preference'
 export type MoveFocusProps = {
     filted_links:Link[],
     set_focus_link_id:Dispatch<SetStateAction<number | null>>
@@ -51,6 +53,12 @@ export const MoveFocus = (p:MoveFocusProps) => {
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
+            if(preference === null) return
+
+            if(is_hotkey_match(e,preference.focus_up)){
+                console.log("hello")
+                set_move_focus_request("p")
+            }
 
             if(
                 e.altKey == false &&
@@ -60,9 +68,6 @@ export const MoveFocus = (p:MoveFocusProps) => {
 
                 if(e.key == "n"){
                     set_move_focus_request("n")
-                }
-                if(e.key == "p"){
-                    set_move_focus_request("p")
                 }
             }
         })

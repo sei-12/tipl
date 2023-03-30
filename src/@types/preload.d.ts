@@ -9,6 +9,9 @@ export interface IElectronAPI {
     open_google_chrome:(words:string[]) => void
 
     onActivateApp:(callback:() => void) => void,
+
+    load_pref_json:() => Promise<[string,string]>,
+    on_update_pref:(callback:() => void) => void
 }
 
 declare global {

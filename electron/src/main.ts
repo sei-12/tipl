@@ -76,6 +76,8 @@ const createWidnow = () => {
     ipcMain.handle('open-url',open_url)
     ipcMain.handle('open-google-chrome',open_google_chrome)
 
+    ipcMain.handle('app-load-pref-json',load_pref_json)
+    
     mainWindow.on('close', function() {
         fs.writeFileSync(WINODW_BOUND_DATA, JSON.stringify(mainWindow.getBounds()));
     });

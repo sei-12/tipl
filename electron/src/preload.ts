@@ -11,4 +11,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
     open_url:(url:string) => ipcRenderer.invoke('open-url',url),
     open_google_chrome:(words:string[]) => ipcRenderer.invoke('open-google-chrome',words),
     onActivateApp:(callback:() => void) => ipcRenderer.on('active-app',callback),
+    load_pref_json:() => ipcRenderer.invoke('app-load-pref-json'),
+    on_update_pref:(callback:() => void) => ipcRenderer.on('update-pref',callback),
 })
