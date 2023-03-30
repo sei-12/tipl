@@ -27,7 +27,7 @@ if(fs.existsSync(PREF_JSON_PATH) == false){
     fs.writeFileSync(PREF_JSON_PATH,"{}")
 }
 
-const DEFAULT_PLEF_JSON_PATH = `file:${__dirname}/../../default-pref.json`
+const DEFAULT_PREF_JSON_PATH = `${__dirname}/../../default-pref.json`
 const mainURL = `file:${__dirname}/../../index.html`
 const prefURL = mainURL + "#/pref"
 
