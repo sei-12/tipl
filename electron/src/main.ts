@@ -59,6 +59,24 @@ const load_pref_json = function(){
 }
 
 const createWidnow = () => {
+    const create_pref_window = () => {
+        const pref_window = new BrowserWindow({
+            width:400,
+            height:200,
+            webPreferences: {
+                preload: path.join(__dirname, "pref-preload.js")
+            }
+        })
+    
+        ipcMain.handle('load-pref-json',load_pref_json)
+        ipcMain.handle('save-pref-json',(_:any,json_text:string) => {
+            fs.writeFileSync(PREF_JSON_PATH,json_text)
+            mainWindow.webContents.send('update-pref')
+        })
+    
+        pref_window.loadURL(prefURL)
+    }
+
     const mainWindow = new BrowserWindow({
         title:"tipl",
         webPreferences: {
@@ -90,20 +108,7 @@ const createWidnow = () => {
     create_pref_window()
 }
 
-const create_pref_window = () => {
-    const pref_window = new BrowserWindow({
-        width:400,
-        height:200,
-        webPreferences: {
-            preload: path.join(__dirname, "pref-preload.js")
-        }
-    })
 
-    ipcMain.handle('load-pref-json',load_pref_json)
-    ipcMain.handle('save-pref-json',(_:any,json_text:string) => {fs.writeFileSync(PREF_JSON_PATH,json_text)})
-
-    pref_window.loadURL(prefURL)
-}
 
 app.whenReady().then(() => {
     createWidnow()
