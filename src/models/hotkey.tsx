@@ -19,6 +19,9 @@ export const is_match_hotkey = function(e:KeyboardEvent,hotkey:Hotkey){
     if(e.ctrlKey != hotkey.ctrl){
         return false
     }
+    if(e.key.toLowerCase() != hotkey.key.toLowerCase()){
+        return false
+    }
 
     return true
 }
