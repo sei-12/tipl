@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from './models/link'
 import { Tag } from './models/tag'
 import { useEffect } from 'react'
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
 import { useState } from 'react'
+import { Hotkey, is_match_hotkey } from './models/hotkey'
+
+export type OpenURLPropsHotkey = {
+    open_google:Hotkey
+    open_url:Hotkey
+}
 
 export type OpenURLProps = {
     focus_link_id:number | null
@@ -11,6 +17,7 @@ export type OpenURLProps = {
     search_word:string
     filter_tag_ids:number[]
     tags:Tag[]
+    hotkeys:OpenURLPropsHotkey
 }
 
 export const OpenURL = (p:OpenURLProps) => {
@@ -42,22 +49,19 @@ export const OpenURL = (p:OpenURLProps) => {
     },[open_request])
     
 
+    const hotkeys = useRef(p.hotkeys)
+
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
-
-            if(
-                e.altKey == false &&
-                e.metaKey ==  false &&
-                e.ctrlKey ==  false){
-                if(e.key != "Enter") return
-                if(e.shiftKey){
-                    set_open_request("google")      
-                }else{
-                    set_open_request("url")
-                }
+            if(is_match_hotkey(e,hotkeys.current.open_google)){
+                set_open_request("google")      
+                return
             }
-            
+            if(is_match_hotkey(e,hotkeys.current.open_url)){
+                set_open_request("url")
+                return
+            }
         })
     },[])
     return (

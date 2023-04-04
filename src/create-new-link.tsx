@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { LinkEditor, LinkEditorProps } from './link-editor';
 import { LinkFilter, LinkFilterProps } from './link-filter';
@@ -9,7 +9,7 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 import { CreateNewTag,CreateNewTagProps } from './create-new-tag';
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys';
-import { resolve } from 'path';
+import { is_match_hotkey,Hotkey } from './models/hotkey';
 
 
 const next_id = function(links_tags:Link[] | Tag[]) : number{
@@ -23,6 +23,7 @@ export type CreateNewLinkProps = {
 	set_focus_link_id:Dispatch<SetStateAction<number | null>>
     set_link_editor_is_show:Dispatch<SetStateAction<boolean>>
     set_reset_search_criteria_request:Dispatch<SetStateAction<boolean>>
+    hotkey:Hotkey
 }
 
 export const CreateNewLink = (p:CreateNewLinkProps) => {
@@ -32,7 +33,8 @@ export const CreateNewLink = (p:CreateNewLinkProps) => {
     }
 
     const [create_reqest,set_create_reqest] = useState<boolean>(false)
-
+    const hotkey = useRef(p.hotkey)
+    
     useEffect(() => {
         if(create_reqest == false) return
 
@@ -80,15 +82,10 @@ export const CreateNewLink = (p:CreateNewLinkProps) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false){
                 return
             }
-
-            if(
-				e.metaKey && 
-				e.shiftKey == false && 
-				e.altKey == false && 
-				e.ctrlKey == false && 
-				e.key == "n"){
-					create_new_link()
-			}
+            if(hotkey.current == null) return
+            if(is_match_hotkey(e,hotkey.current)){
+                create_new_link()
+            }
         })
     },[])
 

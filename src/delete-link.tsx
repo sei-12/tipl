@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from './models/link'
 import { Dispatch , SetStateAction} from 'react'
 import { useState } from 'react'
+import { Hotkey, is_match_hotkey } from './models/hotkey'
 
 export type DeleteLinkProps = {
     focus_link_id:number | null
@@ -9,6 +10,7 @@ export type DeleteLinkProps = {
     filted_links:Link[]
     links:Link[]
     set_links:Dispatch<SetStateAction<Link[]>>
+    hotkey:Hotkey
 }
 
 export const DeleteLink = (p:DeleteLinkProps) => {
@@ -21,17 +23,7 @@ export const DeleteLink = (p:DeleteLinkProps) => {
     }
 
     const [delete_request,set_delete_request] = useState<boolean>(false)
-
-    const hotkey = (e:KeyboardEvent) => {
-        if(
-            e.altKey == false &&
-            e.metaKey ==  true &&
-            e.ctrlKey ==  false&&
-            e.shiftKey ==  false &&
-            e.key == "d"){
-            set_delete_request(true)
-        }
-    }
+    const hotkey = useRef(p.hotkey)
 
     useEffect(() => {
         if( delete_request == false ) return
@@ -40,8 +32,13 @@ export const DeleteLink = (p:DeleteLinkProps) => {
     },[delete_request])
 
     useEffect(() => {
-       document.addEventListener('keydown',hotkey) 
+        document.addEventListener('keydown',(e:KeyboardEvent) => {
+            if(is_match_hotkey(e,hotkey.current)){
+                set_delete_request(true)
+            }
+        }) 
     },[])
+    
     return (
         <div>
             <input type="button" value="delete link (cmd + d)" onClick={delete_link} />

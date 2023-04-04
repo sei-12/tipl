@@ -6,9 +6,10 @@ import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { ChangeEvent } from 'react'
 import { Link } from './models/link'
-import { OpenURL, OpenURLProps } from './open-url'
+import { OpenURL, OpenURLProps, OpenURLPropsHotkey } from './open-url'
 import { HotkeyScapes , Hotkey_Scape } from './hotkeys'
 import { ResetSearchCriteria, ResetSearchCriteriaProps } from './reset-search-criteria'
+import { Hotkey, is_match_hotkey } from './models/hotkey'
 
 export type LinkFilterProps = {
     tags:Tag[]
@@ -16,11 +17,16 @@ export type LinkFilterProps = {
     filted_links:Link[]
     set_filted_links:Dispatch<SetStateAction<Link[]>>
     focus_link_id:number | null
-
+    hotkeys:{
+        focus_search_word_box:Hotkey
+        show_tag_selector:Hotkey
+    }
+    open_url_hotkey:OpenURLPropsHotkey
     //>>>>>
     reset_search_criteria_request:boolean
     set_reset_search_criteria_request:Dispatch<SetStateAction<boolean>>
     //<<<<<
+    reset_search_criteria_hotkey:Hotkey
 }
 
 export const LinkFilter = (p:LinkFilterProps) => {
@@ -77,7 +83,8 @@ export const LinkFilter = (p:LinkFilterProps) => {
         links:p.links,
         search_word:search_word,
         filter_tag_ids:filter_tag_ids,
-        tags:p.tags
+        tags:p.tags,
+        hotkeys:p.open_url_hotkey
     }
 
     const reset_search_criteria_props : ResetSearchCriteriaProps = {
@@ -87,25 +94,26 @@ export const LinkFilter = (p:LinkFilterProps) => {
 
         //>>>>>
         request:p.reset_search_criteria_request,
-        set_request:p.set_reset_search_criteria_request
+        set_request:p.set_reset_search_criteria_request,
         //<<<<<
+        hotkey:p.reset_search_criteria_hotkey
     }
+
+    const hotkeys = useRef(p.hotkeys)
 
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
-            if(
-                e.altKey == false &&
-                e.metaKey ==  false &&
-                e.ctrlKey ==  true&&
-                e.shiftKey ==  false){
-                if(e.key == "/"){
-                    focus_search_word_box()
-                }
-                if(e.key == "3"){
-                    set_tag_selector_is_show(true)
-                }
+
+            if(is_match_hotkey(e,hotkeys.current.focus_search_word_box)){
+                focus_search_word_box()
+                return
             }
+            if(is_match_hotkey(e,hotkeys.current.show_tag_selector)){
+                set_tag_selector_is_show(true)
+                return
+            }
+            
         })
 
     },[])

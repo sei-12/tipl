@@ -5,6 +5,7 @@ import { Tag } from './models/tag'
 import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
+import { Hotkey, is_match_hotkey } from './models/hotkey'
 
 export type LinkEditorProps = {
     is_show:boolean
@@ -14,6 +15,8 @@ export type LinkEditorProps = {
     tags:Tag[]
     set_tags:Dispatch<SetStateAction<Tag[]>>
     focus_link_id:number | null
+    add_tag_hotkey:Hotkey
+    save_hotkey:Hotkey
 }
 
 // ダイアログは再利用可能な形で実装できるかもだが
@@ -213,28 +216,18 @@ export const LinkEditor = (p:LinkEditorProps) => {
         }
     },[selected_tag_ids])
 
+    const save_hotkey = useRef(p.save_hotkey)
+    const add_tag_hotkey = useRef(p.add_tag_hotkey)
+
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.LinkPrompt].includes(Hotkey_Scape.get()) == false) return
 
-            if(
-                e.altKey == false &&
-                e.metaKey ==  false &&
-                e.ctrlKey ==  true&&
-                e.shiftKey ==  false){
-                if(e.key == "Enter" && isComposing == false){
-                    set_save_request(true)
-                } 
+            if(is_match_hotkey(e,save_hotkey.current)){
+                set_save_request(true)
             }
-
-            if(
-                e.altKey == false &&
-                e.metaKey ==  false &&
-                e.ctrlKey ==  true&&
-                e.shiftKey ==  false){
-                if(e.key == "3"){
-                    set_add_tag_request(true)
-                }
+            if(is_match_hotkey(e,add_tag_hotkey.current)){
+                set_add_tag_request(true)
             }
         }) 
     },[])

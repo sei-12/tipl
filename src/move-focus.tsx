@@ -1,12 +1,17 @@
-import React ,{useEffect,useState} from 'react'
+import React ,{useEffect,useRef,useState} from 'react'
 import { Link } from './models/link'
 import { Dispatch , SetStateAction} from 'react'
 import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
 import './move-focus.css'
+import { Hotkey, is_match_hotkey } from './models/hotkey'
 export type MoveFocusProps = {
     filted_links:Link[],
     set_focus_link_id:Dispatch<SetStateAction<number | null>>
 	focus_link_id:number | null
+    hotkeys:{
+        focus_up_hotkey:Hotkey
+        focus_down_hotkey:Hotkey
+    }
 }
 
 export const MoveFocus = (p:MoveFocusProps) => {
@@ -48,22 +53,19 @@ export const MoveFocus = (p:MoveFocusProps) => {
         set_move_focus_request(null)
     },[move_focus_request])
 
+    const hotkeys = useRef(p.hotkeys)
+
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
-
-            if(
-                e.altKey == false &&
-                e.metaKey == false &&
-                e.ctrlKey &&
-                e.shiftKey == false){
-
-                if(e.key == "n"){
-                    set_move_focus_request("n")
-                }
-                if(e.key == "p"){
-                    set_move_focus_request("p")
-                }
+    
+            if(is_match_hotkey(e,hotkeys.current.focus_down_hotkey)){
+                set_move_focus_request("n")
+                return
+            }
+            if(is_match_hotkey(e,hotkeys.current.focus_up_hotkey)){
+                set_move_focus_request("p")
+                return
             }
         })
     },[])

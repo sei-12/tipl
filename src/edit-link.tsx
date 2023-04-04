@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
 import { Dispatch , SetStateAction} from 'react'
 import { useState,useEffect } from 'react'
+import { Hotkey } from './models/hotkey'
 
 export type EditLinkBtnProps = {
     set_link_editor_is_show:Dispatch<SetStateAction<boolean>>
+    hotkey:Hotkey
 }
 
 export const EditLinkBtn = (p:EditLinkBtnProps) => {
 
     const [edit_request,set_edit_request] = useState<boolean>(false)
-
+    const hotkey = useRef(p.hotkey)
     useEffect(() => {
         document.addEventListener("keydown",(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return

@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Dispatch , SetStateAction} from 'react'
 import { useState } from 'react'
 import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
+import { Hotkey, is_match_hotkey } from './models/hotkey'
 
 export type ResetSearchCriteriaProps = {
     set_search_word:Dispatch<SetStateAction<string>>
     set_tag_ids:Dispatch<SetStateAction<number[]>>
     search_word_box:React.RefObject<HTMLInputElement>
 
+    hotkey:Hotkey
     //>>>>>
     request:boolean
     set_request:Dispatch<SetStateAction<boolean>>
@@ -36,17 +38,13 @@ export const ResetSearchCriteria = (p:ResetSearchCriteriaProps) => {
     },[p.request])
     //<<<<<
 
+    const hotkey = useRef(p.hotkey)
+
     useEffect(() => {
         document.addEventListener('keydown',(e) => {
             if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
-            if(
-                e.altKey == false &&
-                e.metaKey ==  false &&
-                e.ctrlKey ==  true&&
-                e.shiftKey ==  false){
-                if(e.key == "r"){
-                    set_reset_request(true)
-                }
+            if(is_match_hotkey(e,hotkey.current)){
+                set_reset_request(true)
             }
         })
     },[])

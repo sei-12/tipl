@@ -39,10 +39,12 @@ function App() {
 
 	const create_new_tag_props : CreateNewTagProps = {
 		set_tags:set_tags,
-		tags:tags
+		tags:tags,
+		hotkey:{ alt: false, meta: true, ctrl: false, shift: true, key: 'n' }
 	}
 
 	const create_new_link_props : CreateNewLinkProps = {
+		hotkey:{ alt: false, meta: true, ctrl: false, shift: false, key: 'n' },
 		set_reset_search_criteria_request:set_reset_search_criteria_request,
 		set_focus_link_id:set_focus_link_id,
 		links:links,
@@ -56,7 +58,15 @@ function App() {
 		links:links,
 		filted_links:filted_links,
 		set_filted_links:set_filted_links,
-
+		hotkeys:{
+			focus_search_word_box:{ alt: false, meta: false, ctrl: true, shift: false, key: '/' },
+			show_tag_selector:{ alt: false, meta: false, ctrl: true, shift: false, key: '3' }
+		},
+		open_url_hotkey:{
+			open_google:{ alt: false, meta: false, ctrl: false, shift: false, key: 'Enter' },
+			open_url:{ alt: false, meta: false, ctrl: true, shift: false, key: 'Enter' }
+		},
+		reset_search_criteria_hotkey:{ alt: false, meta: false, ctrl: true, shift: false, key: 'r' },
 		//>>>>>
 		reset_search_criteria_request:reset_search_criteria_request,
 		set_reset_search_criteria_request:set_reset_search_criteria_request
@@ -64,10 +74,13 @@ function App() {
 	}
 
 	const edit_link_btn : EditLinkBtnProps = {
-		set_link_editor_is_show:set_link_editor_is_show
+		set_link_editor_is_show:set_link_editor_is_show,
+		hotkey:{ alt: false, meta: true, ctrl: false, shift: false, key: 'e' }
 	}
 
 	const link_editor_props : LinkEditorProps = {
+		save_hotkey:{ alt: false, meta: false, ctrl: true, shift: false, key: 'Enter' },
+		add_tag_hotkey:{ alt: false, meta: false, ctrl: true, shift: false, key: '3' },
 		is_show:link_editor_is_show,
 		set_is_show:set_link_editor_is_show,
 		links:links,
@@ -78,12 +91,18 @@ function App() {
 	}
 
 	const move_focus_props : MoveFocusProps = {
+		hotkeys:{
+			focus_up_hotkey:{ alt: false, meta: false, ctrl: true, shift: false, key: 'p' },
+			focus_down_hotkey:{ alt: false, meta: false, ctrl: true, shift: false, key: 'n' },
+
+		},
 		filted_links:filted_links,
 		set_focus_link_id:set_focus_link_id,
 		focus_link_id:focus_link_id
 	}
 
 	const delete_link_props : DeleteLinkProps = {
+		hotkey:{ alt: false, meta: true, ctrl: false, shift: false, key: 'd' },
 		focus_link_id:focus_link_id,
 		links:links,
 		set_links:set_links,

@@ -1,14 +1,16 @@
 import { Tag } from "./models/tag"
-import { Dispatch , SetStateAction} from 'react'
+import { Dispatch , SetStateAction, useRef} from 'react'
 import { Link } from "./models/link"
 import { useState,useEffect } from "react"
 import { Prompt,PromptProps } from "./prompt"
 import { HotkeyScapes,Hotkey_Scape } from "./hotkeys"
 import './create-new-tag.css'
+import { Hotkey, is_match_hotkey } from "./models/hotkey"
 
 export type CreateNewTagProps = {
 	tags:Tag[]
 	set_tags:Dispatch<SetStateAction<Tag[]>>
+	hotkey:Hotkey
 }
 
 export const CreateNewTag = (p:CreateNewTagProps) => {
@@ -30,6 +32,7 @@ export const CreateNewTag = (p:CreateNewTagProps) => {
 		set_prompt_is_show(true)
 	}
 
+	const hotkey = useRef(p.hotkey)
 	const [prompt_is_show,set_prompt_is_show] = useState<boolean>(false)
 	const [prompt_result_buf,set_prompt_result_buf] = useState<string|null>(null)
 	const prompt_props : PromptProps = {
@@ -42,13 +45,8 @@ export const CreateNewTag = (p:CreateNewTagProps) => {
 	useEffect(() => {
 		document.addEventListener("keydown",(e) => {
 			if([HotkeyScapes.Normal].includes(Hotkey_Scape.get()) == false) return
-			if(
-				e.metaKey && 
-				e.shiftKey && 
-				e.altKey == false && 
-				e.ctrlKey == false && 
-				e.key == "n"){
-					create_new_tag()
+			if(is_match_hotkey(e,hotkey.current)){
+				create_new_tag()
 			}
 		})	
 	},[])
