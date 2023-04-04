@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { Link } from './models/link'
 import { Tag } from './models/tag'
 import { useEffect } from 'react'
-import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes, Hotkey_Scape } from './hotkey-scape'
 import { useState } from 'react'
 import { Hotkey, is_match_hotkey } from './models/hotkey'
 

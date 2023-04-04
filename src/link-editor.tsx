@@ -4,7 +4,7 @@ import { Link } from './models/link'
 import { Tag } from './models/tag'
 import { TagList, TagListProps } from './tag-list'
 import { TagSelectoor, TagSelectoorProps } from './tag-selector'
-import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes,Hotkey_Scape } from './hotkey-scape'
 import { Hotkey, is_match_hotkey } from './models/hotkey'
 
 export type LinkEditorProps = {

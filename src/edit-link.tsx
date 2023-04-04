@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes,Hotkey_Scape } from './hotkey-scape'
 import { Dispatch , SetStateAction} from 'react'
 import { useState,useEffect } from 'react'
 import { Hotkey } from './models/hotkey'

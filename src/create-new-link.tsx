@@ -8,7 +8,7 @@ import { Tag } from './models/tag';
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Dispatch , SetStateAction} from 'react'
 import { CreateNewTag,CreateNewTagProps } from './create-new-tag';
-import { HotkeyScapes, Hotkey_Scape } from './hotkeys';
+import { HotkeyScapes, Hotkey_Scape } from './hotkey-scape';
 import { is_match_hotkey,Hotkey } from './models/hotkey';
 
 

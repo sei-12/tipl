@@ -7,7 +7,7 @@ import { TagSelectoor, TagSelectoorProps } from './tag-selector'
 import { ChangeEvent } from 'react'
 import { Link } from './models/link'
 import { OpenURL, OpenURLProps, OpenURLPropsHotkey } from './open-url'
-import { HotkeyScapes , Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes , Hotkey_Scape } from './hotkey-scape'
 import { ResetSearchCriteria, ResetSearchCriteriaProps } from './reset-search-criteria'
 import { Hotkey, is_match_hotkey } from './models/hotkey'
 

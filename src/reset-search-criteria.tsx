@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Dispatch , SetStateAction} from 'react'
 import { useState } from 'react'
-import { HotkeyScapes,Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes,Hotkey_Scape } from './hotkey-scape'
 import { Hotkey, is_match_hotkey } from './models/hotkey'
 
 export type ResetSearchCriteriaProps = {

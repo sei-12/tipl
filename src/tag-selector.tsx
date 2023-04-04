@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState , ChangeEvent} from 'react'
-import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes, Hotkey_Scape } from './hotkey-scape'
 import { Tag } from './models/tag'
 import './tag-selector.css'
 

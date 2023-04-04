@@ -3,7 +3,7 @@ import { Dispatch , SetStateAction, useRef} from 'react'
 import { Link } from "./models/link"
 import { useState,useEffect } from "react"
 import { Prompt,PromptProps } from "./prompt"
-import { HotkeyScapes,Hotkey_Scape } from "./hotkeys"
+import { HotkeyScapes,Hotkey_Scape } from "./hotkey-scape"
 import './create-new-tag.css'
 import { Hotkey, is_match_hotkey } from "./models/hotkey"
 

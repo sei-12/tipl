@@ -1,7 +1,7 @@
 import React ,{useEffect,useRef,useState} from 'react'
 import { Link } from './models/link'
 import { Dispatch , SetStateAction} from 'react'
-import { HotkeyScapes, Hotkey_Scape } from './hotkeys'
+import { HotkeyScapes, Hotkey_Scape } from './hotkey-scape'
 import './move-focus.css'
 import { Hotkey, is_match_hotkey } from './models/hotkey'
 export type MoveFocusProps = {
